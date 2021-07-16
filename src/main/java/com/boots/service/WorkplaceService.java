@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,11 +32,23 @@ public class WorkplaceService {
       }
   */
     public List<Workplace> allWorkplace() {
-        return workplaceRepository.findAll();
+        List<Workplace> workplaceRepositoryAll = workplaceRepository.findAll();
+        Comparator<? super Workplace> comparator = new Comparator<Workplace>() {
+            @Override
+            public int compare(Workplace o1, Workplace o2) {
+                if (o1.getId() > o2.getId()) {
+                    return 1;
+                }
+
+                if (o1.getId() < o2.getId()) {
+                    return -1;
+                }
+                return 0;
+            }
+        };
+        workplaceRepositoryAll.sort(comparator);
+        return workplaceRepositoryAll;
     }
-
-
-
 
 
     public boolean saveWorkplace(Workplace workplace) {
@@ -73,21 +86,21 @@ public class WorkplaceService {
 //        return true;
 //    }
 
-    public boolean bronWorkplace(Long aLong,Long status) {
+    public boolean bronWorkplace(Long aLong, Long status) {
         System.out.println("bronWorkplace---001 " + aLong);
 
         Optional<Workplace> workplaceRepositoryById = workplaceRepository.findById(aLong);
 
         if (workplaceRepositoryById.isPresent()) {
             workplaceRepositoryById.get().setStatus(status);
-            System.out.println("bronWorkplace---005 найден " + aLong + " "+workplaceRepositoryById);
-            workplaceRepository.save( workplaceRepositoryById.get());
+            System.out.println("bronWorkplace---005 найден " + aLong + " " + workplaceRepositoryById);
+            workplaceRepository.save(workplaceRepositoryById.get());
             return true;
         }
         return false;
     }
 
- public boolean deleteWorkplace(Long aLong) {
+    public boolean deleteWorkplace(Long aLong) {
         System.out.println("deleteWorkplace---001 " + aLong);
 
         if (workplaceRepository.findById(aLong).isPresent()) {
