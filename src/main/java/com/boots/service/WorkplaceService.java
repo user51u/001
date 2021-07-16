@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class WorkplaceService {
@@ -34,9 +35,12 @@ public class WorkplaceService {
     }
 
 
+
+
+
     public boolean saveWorkplace(Workplace workplace) {
 
-        Workplace workplaceRepositoryById = workplaceRepository.findByNumber(workplace.getNumber());
+        Workplace workplaceRepositoryById = workplaceRepository.findById(workplace.getNumber()).get();
         System.out.println("saveWorkplace---001 workplaceRepositoryById=" + workplaceRepositoryById);
         if (workplaceRepositoryById != null) {
 
@@ -50,24 +54,40 @@ public class WorkplaceService {
         workplaceRepository.save(workplace);
         return true;
     }
- public boolean bronWorkplace(Workplace workplace) {
+//
+//
+// public boolean bronWorkplace(Workplace workplace) {
+//
+//        Workplace workplaceRepositoryById = workplaceRepository.findByNumber(workplace.getNumber());
+//        System.out.println("saveWorkplace---001 workplaceRepositoryById=" + workplaceRepositoryById);
+//        if (workplaceRepositoryById != null) {
+//
+////            workplace.setId(workplaceRepositoryById.getId());
+////            workplace.setNumber(workplaceRepositoryById.getNumber());
+////            workplace.setDetail(workplaceRepositoryById.getDetail());
+//            workplace.setStatus(1l);
+//        } else {
+//          // workplace.setWorkplaceStatuses(Collections.singleton(new WorkplaceStatus(2L, "ROLE_USER")));
+//        }
+//        workplaceRepository.save(workplace);
+//        return true;
+//    }
 
-        Workplace workplaceRepositoryById = workplaceRepository.findByNumber(workplace.getNumber());
-        System.out.println("saveWorkplace---001 workplaceRepositoryById=" + workplaceRepositoryById);
-        if (workplaceRepositoryById != null) {
+    public boolean bronWorkplace(Long aLong,Long status) {
+        System.out.println("bronWorkplace---001 " + aLong);
 
-//            workplace.setId(workplaceRepositoryById.getId());
-//            workplace.setNumber(workplaceRepositoryById.getNumber());
-//            workplace.setDetail(workplaceRepositoryById.getDetail());
-            workplace.setStatus(1l);
-        } else {
-          // workplace.setWorkplaceStatuses(Collections.singleton(new WorkplaceStatus(2L, "ROLE_USER")));
+        Optional<Workplace> workplaceRepositoryById = workplaceRepository.findById(aLong);
+
+        if (workplaceRepositoryById.isPresent()) {
+            workplaceRepositoryById.get().setStatus(status);
+            System.out.println("bronWorkplace---005 найден " + aLong + " "+workplaceRepositoryById);
+            workplaceRepository.save( workplaceRepositoryById.get());
+            return true;
         }
-        workplaceRepository.save(workplace);
-        return true;
+        return false;
     }
 
-    public boolean deleteWorkplace(Long aLong) {
+ public boolean deleteWorkplace(Long aLong) {
         System.out.println("deleteWorkplace---001 " + aLong);
 
         if (workplaceRepository.findById(aLong).isPresent()) {

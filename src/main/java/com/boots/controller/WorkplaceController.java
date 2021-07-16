@@ -27,15 +27,16 @@ public class WorkplaceController {
                                   @RequestParam(required = true, defaultValue = "") String action,
                                   Model model) {
 
-        System.out.println("deleteWorkplace---001 workplaceId=" +workplaceId);
-        System.out.println("deleteWorkplace---005 action=" +action);
+        System.out.println("deleteWorkplace---001 workplaceId=" + workplaceId);
+        System.out.println("deleteWorkplace---005 action=" + action);
 
         if (action.equals("delete")) {
             workplaceService.deleteWorkplace(workplaceId);
         }
         return "redirect:/workplace";
     }
-@GetMapping("/bron")
+
+    @GetMapping("/bron")
     public String bronList(Model model) {
         System.out.println("workplaceList---001 ");
         model.addAttribute("allWorkplace", workplaceService.allWorkplace());
@@ -43,15 +44,21 @@ public class WorkplaceController {
     }
 
     @PostMapping("/bron")
-    public String bronWorkplace(@RequestParam(required = true, defaultValue = "") Long workplaceId,
-                                  @RequestParam(required = true, defaultValue = "") String action,
-                                  Model model) {
+    public String bronWorkplace1(@RequestParam(required = true, defaultValue = "") Long workplaceId,
+                                @RequestParam(required = true, defaultValue = "") String action,
+                                Model model) {
 
-        System.out.println("deleteWorkplace---001 workplaceId=" +workplaceId);
-        System.out.println("deleteWorkplace---005 action=" +action);
+        System.out.println("bronWorkplace1---001 workplaceId=" + workplaceId);
+        System.out.println("bronWorkplace1---005 action=" + action);
 
         if (action.equals("bron")) {
-         //   workplaceService.bronWorkplace(workplaceId);
+            System.out.println("bronWorkplace1---010 action=" + action);
+                workplaceService.bronWorkplace(workplaceId,1l);
+        }
+
+        if (action.equals("bronsnat")) {
+            System.out.println("bronWorkplace1---010 action=" + action);
+                workplaceService.bronWorkplace(workplaceId,2l);
         }
         return "redirect:/bron";
     }
@@ -86,6 +93,30 @@ public class WorkplaceController {
         System.out.println("addWorkplace---010 ВРОДЕ ДОБАВИЛИ");
         return "redirect:/";
     }
+
+//    @PostMapping("/bron")
+//    public String bronWorkplace(@ModelAttribute("userForm") @Valid Workplace workplace, BindingResult bindingResult, Model model) {
+//
+//        System.out.println("bronWorkplace---001 " + workplace);
+//        if (bindingResult.hasErrors()) {
+//            System.out.println("bronWorkplace---005 ERROR");
+//            return "bron";
+//        }
+//
+//        if (!workplaceService.saveWorkplace(workplace)) {
+//            System.out.println("bronWorkplace---010 ERROR");
+//            return "bron";
+//        }
+//
+//        if (action.equals("bron")) {
+//            workplaceService.bronWorkplace(workplaceId);
+//        }
+//
+//
+//
+//        System.out.println("bronWorkplace---010 ВРОДЕ ДОБАВИЛИ");
+//        return "redirect:/bron";
+//    }
 
 
 }
