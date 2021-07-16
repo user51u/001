@@ -1,5 +1,6 @@
 package com.boots.service;
 
+import com.boots.entity.Role;
 import com.boots.entity.WorkplaceStatus;
 import com.boots.entity.User;
 import com.boots.entity.Workplace;
@@ -9,10 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class WorkplaceService {
@@ -53,14 +51,13 @@ public class WorkplaceService {
 
     public boolean saveWorkplace(Workplace workplace) {
 
-        Workplace workplaceRepositoryById = workplaceRepository.findById(workplace.getNumber()).get();
+        Optional<Workplace> workplaceRepositoryById = workplaceRepository.findById(workplace.getNumber());
         System.out.println("saveWorkplace---001 workplaceRepositoryById=" + workplaceRepositoryById);
-        if (workplaceRepositoryById != null) {
-
-            workplace.setId(workplaceRepositoryById.getId());
-            workplace.setNumber(workplaceRepositoryById.getNumber());
-            workplace.setDetail(workplaceRepositoryById.getDetail());
-            workplace.setStatus(workplaceRepositoryById.getStatus());
+        if (workplaceRepositoryById.isPresent() ) {
+            workplace.setId(workplaceRepositoryById.get().getId());
+            workplace.setNumber(workplaceRepositoryById.get().getNumber());
+            workplace.setDetail(workplaceRepositoryById.get().getDetail());
+            workplace.setStatus(workplaceRepositoryById.get().getStatus());
         } else {
             workplace.setWorkplaceStatuses(Collections.singleton(new WorkplaceStatus(2L, "ROLE_USER")));
         }
@@ -86,15 +83,42 @@ public class WorkplaceService {
 //        return true;
 //    }
 
-    public boolean bronWorkplace(Long aLong, Long status) {
-        System.out.println("bronWorkplace---001 " + aLong);
+    public boolean bronWorkplace(Long id, Long status) {
+        System.out.println("bronWorkplace---001 id=" + id);
 
-        Optional<Workplace> workplaceRepositoryById = workplaceRepository.findById(aLong);
+
+
+//        Optional<Workplace> workplaceRepositoryById = workplaceRepository.findById(workplace.getNumber());
+//        System.out.println("saveWorkplace---001 workplaceRepositoryById=" + workplaceRepositoryById);
+//        if (workplaceRepositoryById.isPresent() ) {
+//            workplace.setId(workplaceRepositoryById.get().getId());
+//            workplace.setNumber(workplaceRepositoryById.get().getNumber());
+//            workplace.setDetail(workplaceRepositoryById.get().getDetail());
+//            workplace.setStatus(workplaceRepositoryById.get().getStatus());
+//        } else {
+//            workplace.setWorkplaceStatuses(Collections.singleton(new WorkplaceStatus(2L, "ROLE_USER")));
+//        }
+//        workplaceRepository.save(workplace);
+
+        Optional<Workplace> workplaceRepositoryById = workplaceRepository.findById(id);
 
         if (workplaceRepositoryById.isPresent()) {
-            workplaceRepositoryById.get().setStatus(status);
-            System.out.println("bronWorkplace---005 найден " + aLong + " " + workplaceRepositoryById);
-            workplaceRepository.save(workplaceRepositoryById.get());
+            Workplace workplace = workplaceRepositoryById.get();
+            workplace.setStatus(status);
+            Set<WorkplaceStatus> workplaceStatuses = workplaceRepositoryById.get().getWorkplaceStatuses();
+            System.out.println("bronWorkplace---005 найден " + id + " " + workplaceRepositoryById);
+            System.out.println("bronWorkplace---010 найден " + id + " " + workplaceRepositoryById.get());
+            System.out.println("bronWorkplace---015 найден " + workplaceStatuses );
+            workplaceStatuses.clear();
+            workplaceStatuses.add(new WorkplaceStatus(status, "ROLE_USER"));
+
+         //   workplaceRepositoryById.get().setWorkplaceStatuses(Collections.singleton(new WorkplaceStatus()));
+//            System.out.println("bronWorkplace---015 найден " + id + " " + workplaceRepositoryById);
+//            System.out.println("bronWorkplace---020 найден " + id + " " + workplaceRepositoryById.get());
+//            System.out.println("bronWorkplace---025 workplaceRepository " + workplaceRepository);
+         //   workplace.setWorkplaceStatuses(Collections.singleton(new WorkplaceStatus(1L, "ROLE_USER")));
+            workplace.setWorkplaceStatuses(workplaceStatuses);
+            workplaceRepository.save( workplace);
             return true;
         }
         return false;
