@@ -33,13 +33,23 @@
         <td>
           <form action="${pageContext.request.contextPath}/bron" method="post">
             <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-            <input type="hidden" name="action" value="bron"/>
-            <button type="submit">Бронировать</button>
+            <input type="hidden" name="action" value="bron1"/>
+            <button type="submit">Занято</button>
           </form>
          <form action="${pageContext.request.contextPath}/bron" method="post">
             <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-            <input type="hidden" name="action" value="bronsnat"/>
-            <button type="submit">Снять Бронирование</button>
+            <input type="hidden" name="action" value="bron2"/>
+            <button type="submit">Свободно</button>
+          </form>
+        <form action="${pageContext.request.contextPath}/bron" method="post">
+            <input type="hidden" name="workplaceId" value="${workplace.id}"/>
+            <input type="hidden" name="action" value="bron3"/>
+            <button type="submit">Выбрано</button>
+          </form>
+         <form action="${pageContext.request.contextPath}/bron" method="post">
+            <input type="hidden" name="workplaceId" value="${workplace.id}"/>
+            <input type="hidden" name="action" value="bron4"/>
+            <button type="submit">Недоступно</button>
           </form>
 
         </td>

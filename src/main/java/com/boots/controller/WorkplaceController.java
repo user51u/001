@@ -51,15 +51,23 @@ public class WorkplaceController {
         System.out.println("bronWorkplace1---001 workplaceId=" + workplaceId);
         System.out.println("bronWorkplace1---005 action=" + action);
 
-        if (action.equals("bron")) {
+        if (action.equals("bron1")) {
             System.out.println("bronWorkplace1---010 action=" + action);
                 workplaceService.bronWorkplace(workplaceId,1l);
         }
-
-        if (action.equals("bronsnat")) {
+if (action.equals("bron2")) {
             System.out.println("bronWorkplace1---010 action=" + action);
                 workplaceService.bronWorkplace(workplaceId,2l);
         }
+if (action.equals("bron3")) {
+            System.out.println("bronWorkplace1---010 action=" + action);
+                workplaceService.bronWorkplace(workplaceId,3l);
+        }
+if (action.equals("bron4")) {
+            System.out.println("bronWorkplace1---010 action=" + action);
+                workplaceService.bronWorkplace(workplaceId,4l);
+        }
+
         return "redirect:/bron";
     }
 
