@@ -13,9 +13,10 @@
 <div>
   <h3>${pageContext.request.userPrincipal.name}</h3>
 
-  <h4><a href="/regwor">Регистрация workplace</a></h4>
-  <h4><a href="/admin">Пользователи (только админ)</a></h4>
+  <h4><a href="/regwor">Регистрация рабчего места</a></h4>
   <h4><a href="/workplace">Рабочие места</a></h4>
+  <h4><a href="/admin">Пользователи (только админ)</a></h4>
+
 </div>
 </body>
 </html>

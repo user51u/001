@@ -12,10 +12,10 @@
 <body>
 <div>
   <form:form method="POST" modelAttribute="userForm">
-    <h2>Регистрация</h2>
+    <h2>Регистрация рабочего места</h2>
     <input name="number" type="text" placeholder="number"  autofocus="true"/>
     <input name="detail" type="text" placeholder="detail"/>
-    <button type="submit">Зарегистрироваться</button>
+    <button type="submit">Зарегистрировать</button>
   </form:form>
  <a href="/indexadmin">Назад</a>
 </div>
