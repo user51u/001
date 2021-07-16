@@ -50,6 +50,22 @@ public class WorkplaceService {
         workplaceRepository.save(workplace);
         return true;
     }
+ public boolean bronWorkplace(Workplace workplace) {
+
+        Workplace workplaceRepositoryById = workplaceRepository.findByNumber(workplace.getNumber());
+        System.out.println("saveWorkplace---001 workplaceRepositoryById=" + workplaceRepositoryById);
+        if (workplaceRepositoryById != null) {
+
+//            workplace.setId(workplaceRepositoryById.getId());
+//            workplace.setNumber(workplaceRepositoryById.getNumber());
+//            workplace.setDetail(workplaceRepositoryById.getDetail());
+            workplace.setStatus(1l);
+        } else {
+          // workplace.setWorkplaceStatuses(Collections.singleton(new WorkplaceStatus(2L, "ROLE_USER")));
+        }
+        workplaceRepository.save(workplace);
+        return true;
+    }
 
     public boolean deleteWorkplace(Long aLong) {
         System.out.println("deleteWorkplace---001 " + aLong);
@@ -60,6 +76,7 @@ public class WorkplaceService {
         }
         return false;
     }
+
 
     public List<User> usergtList(Long idMin) {
         return entityManager.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)

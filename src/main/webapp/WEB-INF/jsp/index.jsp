@@ -19,7 +19,7 @@
   <sec:authorize access="isAuthenticated()">
     <h4><a href="/logout">Выйти</a></h4>
   </sec:authorize>
-  <h4><a href="/news">Бродирование рабочего места (только пользователь)</a></h4>
+  <h4><a href="/bron">Бронирование рабочего места (только пользователь)</a></h4>
   <h4><a href="/news">Новости (только пользователь)</a></h4>
   <h4><a href="/indexadmin">Пользователи (только админ)</a></h4>
 </div>
