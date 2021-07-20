@@ -13,6 +13,7 @@ public class WorkplaceBron {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long number;
+    private Long id_user;
     private String detail;
     private Date date_start2=null;
     private Date date_stop=null;
@@ -57,13 +58,22 @@ public class WorkplaceBron {
         this.date_stop = date_stop;
     }
 
+    public Long getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(Long id_user) {
+        this.id_user = id_user;
+    }
+
     @Override
     public String toString() {
         return "WorkplaceBron{" +
                 "id=" + id +
                 ", number=" + number +
+                ", id_user=" + id_user +
                 ", detail='" + detail + '\'' +
-                ", date_start=" + date_start2 +
+                ", date_start2=" + date_start2 +
                 ", date_stop=" + date_stop +
                 '}';
     }

@@ -17,6 +17,7 @@
     <thead>
     <th>ID</th>
     <th>Номер</th>
+    <th>Пользователь</th>
     <th>Описение</th>
     <th>Старт</th>
 
@@ -26,6 +27,7 @@
       <tr>
         <td>${workplace.id}</td>
         <td>${workplace.number}</td>
+        <td>${workplace.id_user}</td>
         <td>${workplace.detail}</td>
         <td>${workplace.date_start2}</td>
         <td>${workplace.date_stop}</td>
