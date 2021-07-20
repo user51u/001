@@ -17,6 +17,9 @@
     <input name="detail" type="text" placeholder="detail"/>
     <button type="submit">Зарегистрировать</button>
   </form:form>
+
+
+
  <a href="/indexadmin">Назад</a>
 </div>
 </body>
