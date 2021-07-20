@@ -84,7 +84,7 @@
 
 
         </td>
-<td><form action="${pageContext.request.contextPath}/bron" method="post">
+<td><form action="${pageContext.request.contextPath}/workplacebron" method="post">
                 <input type="hidden" name="workplaceId" value="${workplace.id}"/>
                 <input type="hidden" name="action" value="bron5"/>
                 <button type="submit">Просмотр брони</button>
