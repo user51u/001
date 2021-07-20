@@ -45,42 +45,22 @@
     <th>ID</th>
     <th>Номер</th>
     <th>Описение</th>
-    <th>Статус</th>
+    <th>Старт</th>
 
-    <th>Статус</th>
+    <th>Стоп</th>
     </thead>
-    <c:forEach items="${allWorkplace}" var="workplace">
+    <c:forEach items="${allWorkplaceBron}" var="workplace">
       <tr>
         <td>${workplace.id}</td>
         <td>${workplace.number}</td>
         <td>${workplace.detail}</td>
-        <td>${workplace.status}</td>
-        <td>${workplace.status}</td>
+        <td>${workplace.date_start}</td>
+        <td>${workplace.date_stop}</td>
         <td>
-           <c:forEach items="${workplace.workplaceStatuses}" var="statusWorkplace">${statusWorkplace.name}    </c:forEach>
+
         </td>
 
         <td>
-          <form action="${pageContext.request.contextPath}/bron" method="post">
-            <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-            <input type="hidden" name="action" value="bron1"/>
-            <button type="submit">Занято</button>
-          </form>
-         <form action="${pageContext.request.contextPath}/bron" method="post">
-            <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-            <input type="hidden" name="action" value="bron2"/>
-            <button type="submit">Свободно</button>
-          </form>
-        <form action="${pageContext.request.contextPath}/bron" method="post">
-            <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-            <input type="hidden" name="action" value="bron3"/>
-            <button type="submit">Выбрано</button>
-          </form>
-         <form action="${pageContext.request.contextPath}/bron" method="post">
-            <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-            <input type="hidden" name="action" value="bron4"/>
-            <button type="submit">Недоступно</button>
-          </form>
 
 
         </td>

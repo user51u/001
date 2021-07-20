@@ -22,6 +22,15 @@ public class WorkplaceController {
         return "workplace";
     }
 
+    @GetMapping("/workplacebron")
+    public String workplaceListBron(Model model) {
+        System.out.println("workplaceListBron---001 ");
+        model.addAttribute("allWorkplaceBron", workplaceService.allWorkplaceBron());
+        return "workplacebron";
+    }
+
+
+
     @PostMapping("/workplace")
     public String deleteWorkplace(@RequestParam(required = true, defaultValue = "") Long workplaceId,
                                   @RequestParam(required = true, defaultValue = "") String action,

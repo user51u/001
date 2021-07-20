@@ -1,9 +1,7 @@
 package com.boots.service;
 
-import com.boots.entity.Role;
-import com.boots.entity.WorkplaceStatus;
-import com.boots.entity.User;
-import com.boots.entity.Workplace;
+import com.boots.entity.*;
+import com.boots.repository.WorkplaceBronRepository;
 import com.boots.repository.WorkplaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +18,9 @@ public class WorkplaceService {
     @Autowired
     WorkplaceRepository workplaceRepository;
 
+    @Autowired
+    WorkplaceBronRepository workplaceBronRepository;
+
     /*  public User findUserById(Long userId) {
           Optional<User> userFromDb = userRepository.findById(userId);
           return userFromDb.orElse(new User());
@@ -29,7 +30,26 @@ public class WorkplaceService {
           return userRepository.findAll();
       }
   */
-    public List<Workplace> allWorkplace() {
+    public List<WorkplaceBron> allWorkplaceBron() {
+        List<WorkplaceBron> workplaceRepositoryAll = workplaceBronRepository.findAll();
+//        Comparator<? super WorkplaceBron> comparator = new Comparator<Workplace>() {
+//            @Override
+//            public int compare(WorkplaceBron o1, WorkplaceBron o2) {
+//                if (o1.getId() > o2.getId()) {
+//                    return 1;
+//                }
+//
+//                if (o1.getId() < o2.getId()) {
+//                    return -1;
+//                }
+//                return 0;
+//            }
+//        };
+//        workplaceRepositoryAll.sort(comparator);
+        return workplaceRepositoryAll;
+    }
+
+ public List<Workplace> allWorkplace() {
         List<Workplace> workplaceRepositoryAll = workplaceRepository.findAll();
         Comparator<? super Workplace> comparator = new Comparator<Workplace>() {
             @Override
