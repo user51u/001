@@ -56,7 +56,7 @@
         <td>${workplace.detail}</td>
         <td>${workplace.status}</td>
         <td>
-           <c:forEach items="${workplace.workplaceStatuses}" var="statusWorkplace">${statusWorkplace.name} </c:forEach>
+           <c:forEach items="${workplace.workplaceStatuses}" var="statusWorkplace">${statusWorkplace.name}    </c:forEach>
         </td>
 
         <td>
