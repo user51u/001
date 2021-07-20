@@ -10,6 +10,35 @@
 </head>
 
 <body>
+<label for="start">Дата начала брони:</label>
+
+<input type="date" id="start" name="trip-start"
+       value="2018-07-22"
+       min="2021-06-01" >
+
+        <label for="appt">Время начала брони:</label>
+
+                     <input type="time" id="appt" name="appt"
+                            min="09:00" max="18:00" required> <br><br>
+
+
+       <label for="start">Дата конца брони: </label>
+
+       <input type="date" id="start" name="trip-start"
+              value="2018-07-22"
+              min="2021-06-01" >
+
+
+              <label for="appt">Время конца брони:</label>
+
+              <input type="time" id="appt" name="appt"
+                     min="09:00" max="18:00" required> <br><br>
+
+
+
+
+
+
 <div>
   <table>
     <thead>
