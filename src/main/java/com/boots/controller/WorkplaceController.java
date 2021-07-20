@@ -54,18 +54,27 @@ public class WorkplaceController {
         if (action.equals("bron1")) {
             System.out.println("bronWorkplace1---010 action=" + action);
             workplaceService.bronWorkplace(workplaceId, 1l);
+            return "redirect:/bron";
         }
         if (action.equals("bron2")) {
             System.out.println("bronWorkplace1---010 action=" + action);
             workplaceService.bronWorkplace(workplaceId, 2l);
+            return "redirect:/bron";
         }
         if (action.equals("bron3")) {
             System.out.println("bronWorkplace1---010 action=" + action);
             workplaceService.bronWorkplace(workplaceId, 3l);
+            return "redirect:/bron";
         }
         if (action.equals("bron4")) {
             System.out.println("bronWorkplace1---010 action=" + action);
             workplaceService.bronWorkplace(workplaceId, 4l);
+            return "redirect:/bron";
+        }
+        if (action.equals("bron5")) {
+            System.out.println("bronWorkplace1---010 action=" + action);
+            workplaceService.bronWorkplace(workplaceId, 4l);
+            return "redirect:/workplacebron";
         }
 
         return "redirect:/bron";

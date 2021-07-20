@@ -35,7 +35,19 @@
                      min="09:00" max="18:00" required> <br><br>
 
 
+  <button ondblclick="My_Date()">Return Date</button>
 
+    <p id="test"></p>
+
+
+
+    <script>
+        function My_Date() {
+        var g =    document.getElementById("start").value;
+        document.getElementById('test').innerHTML= g;
+
+        }
+    </script>
 
 
 
