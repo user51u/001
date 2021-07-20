@@ -10,33 +10,6 @@
 </head>
 
 <body>
-<label for="start">Дата начала брони:</label>
-
-<input type="date" id="start" name="trip-start"
-       value="2018-07-22"
-       min="2021-06-01" >
-
-        <label for="appt">Время начала брони:</label>
-
-                     <input type="time" id="appt" name="appt"
-                            min="09:00" max="18:00" required> <br><br>
-
-
-       <label for="start">Дата конца брони: </label>
-
-       <input type="date" id="start" name="trip-start"
-              value="2018-07-22"
-              min="2021-06-01" >
-
-
-              <label for="appt">Время конца брони:</label>
-
-              <input type="time" id="appt" name="appt"
-                     min="09:00" max="18:00" required> <br><br>
-
-
-
-
 
 
 <div>
@@ -54,7 +27,7 @@
         <td>${workplace.id}</td>
         <td>${workplace.number}</td>
         <td>${workplace.detail}</td>
-        <td>${workplace.date_start}</td>
+        <td>${workplace.date_start2}</td>
         <td>${workplace.date_stop}</td>
         <td>
 
@@ -67,19 +40,8 @@
 <td><form action="${pageContext.request.contextPath}/workplacebron" method="post">
                 <input type="hidden" name="workplaceId" value="${workplace.id}"/>
                 <input type="hidden" name="action" value="bron5"/>
-                <button type="submit">Просмотр брони</button>
+                <button type="submit">Удалить бронь</button>
               </form>
-
-              <form:form method="POST" modelAttribute="userForm">
-                    <h2>Регистрация рабочего места</h2>
-                    <input type="date" id="start" name="trip-start"
-                           value="2018-07-22"
-                           min="2021-06-01" >
-                    <input name="number" type="text" placeholder="number"  autofocus="true"/>
-                    <input name="detail" type="text" placeholder="detail"/>
-                    <button type="submit">Зарегистрировать</button>
-                  </form:form>
-              </td>
 
 
       </tr>

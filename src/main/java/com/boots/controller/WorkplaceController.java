@@ -1,6 +1,7 @@
 package com.boots.controller;
 
 import com.boots.entity.Workplace;
+import com.boots.entity.WorkplaceBron;
 import com.boots.service.WorkplaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,12 +24,11 @@ public class WorkplaceController {
     }
 
     @GetMapping("/workplacebron")
-    public String workplaceListBron(Model model) {
-        System.out.println("workplaceListBron---001 ");
-        model.addAttribute("allWorkplaceBron", workplaceService.allWorkplaceBron());
+    public String workplaceListBron(@RequestParam(required = true, defaultValue = "") Long workplaceId,Model model) {
+        System.out.println("workplaceListBron---001 "+model);
+        model.addAttribute("allWorkplaceBron", workplaceService.allWorkplaceBronById(workplaceId));
         return "workplacebron";
     }
-
 
 
     @PostMapping("/workplace")
@@ -53,9 +53,12 @@ public class WorkplaceController {
     }
 
     @PostMapping("/bron")
-    public String bronWorkplace1(@RequestParam(required = true, defaultValue = "") Long workplaceId,
-                                 @RequestParam(required = true, defaultValue = "") String action,
-                                 Model model) {
+    public String bronWorkplace1(
+
+            @RequestParam(required = true, defaultValue = "") Long workplaceId,
+
+            @RequestParam(required = true, defaultValue = "") String action,
+            Model model) {
 
         System.out.println("bronWorkplace1---001 workplaceId=" + workplaceId);
         System.out.println("bronWorkplace1---005 action=" + action);
@@ -83,8 +86,17 @@ public class WorkplaceController {
         if (action.equals("bron5")) {
             System.out.println("bronWorkplace1---010 action=" + action);
             workplaceService.bronWorkplace(workplaceId, 4l);
-            return "redirect:/workplacebron";
+            return "redirect:/workplacebron?workplaceId="+workplaceId;
         }
+
+        if (action.equals("bron6")) {
+            System.out.println("bronWorkplace1---010 action=" + action);
+
+        //    model.addAttribute("userForm", new WorkplaceBron());
+            workplaceService.bronWorkplaceBron(workplaceId, 4l);
+            return "redirect:/bron";
+        }
+
 
         return "redirect:/bron";
     }

@@ -1,6 +1,8 @@
 package com.boots.entity;
 
 import javax.persistence.*;
+
+
 import java.sql.Date;
 import java.util.Set;
 
@@ -12,7 +14,7 @@ public class WorkplaceBron {
     private Long id;
     private Long number;
     private String detail;
-    private Date date_start=null;
+    private Date date_start2=null;
     private Date date_stop=null;
 
     public Long getId() {
@@ -39,12 +41,12 @@ public class WorkplaceBron {
         this.detail = detail;
     }
 
-    public Date getDate_start() {
-        return date_start;
+    public Date getDate_start2() {
+        return date_start2;
     }
 
-    public void setDate_start(Date date_start) {
-        this.date_start = date_start;
+    public void setDate_start2(Date date_start2) {
+        this.date_start2 = date_start2;
     }
 
     public Date getDate_stop() {
@@ -61,7 +63,7 @@ public class WorkplaceBron {
                 "id=" + id +
                 ", number=" + number +
                 ", detail='" + detail + '\'' +
-                ", date_start=" + date_start +
+                ", date_start=" + date_start2 +
                 ", date_stop=" + date_stop +
                 '}';
     }
