@@ -23,28 +23,27 @@
 
     <th>Стоп</th>
     </thead>
-    <c:forEach items="${allWorkplaceBron}" var="workplace">
+    <c:forEach items="${allWorkplaceBron}" var="workplacebron">
       <tr>
-        <td>${workplace.id}</td>
-        <td>${workplace.number}</td>
-        <td>${workplace.id_user}</td>
-        <td>${workplace.detail}</td>
-        <td>${workplace.date_start2}</td>
-        <td>${workplace.date_stop}</td>
+        <td>${workplacebron.id}</td>
+        <td>${workplacebron.number}</td>
+        <td>${workplacebron.id_user}</td>
+        <td>${workplacebron.detail}</td>
+        <td>${workplacebron.date_start2}</td>
+        <td>${workplacebron.date_stop}</td>
         <td>
 
         </td>
 
         <td>
 
-
-        </td>
 <td><form action="${pageContext.request.contextPath}/workplacebron" method="post">
-                <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-                <input type="hidden" name="action" value="bron5"/>
+                <input type="hidden" name="workplaceId" value="${workplacebron.number}"/>
+                <input type="hidden" name="bronId" value="${workplacebron.id}"/>
+                <input type="hidden" name="action" value="delete"/>
                 <button type="submit">Удалить бронь</button>
               </form>
-
+        </td>
 
       </tr>
     </c:forEach>

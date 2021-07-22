@@ -23,14 +23,6 @@ public class WorkplaceController {
         return "workplace";
     }
 
-    @GetMapping("/workplacebron")
-    public String workplaceListBron(@RequestParam(required = true, defaultValue = "") Long workplaceId,Model model) {
-        System.out.println("workplaceListBron---001 "+model);
-        model.addAttribute("allWorkplaceBron", workplaceService.allWorkplaceBronById(workplaceId));
-        return "workplacebron";
-    }
-
-
     @PostMapping("/workplace")
     public String deleteWorkplace(@RequestParam(required = true, defaultValue = "") Long workplaceId,
                                   @RequestParam(required = true, defaultValue = "") String action,
@@ -44,6 +36,41 @@ public class WorkplaceController {
         }
         return "redirect:/workplace";
     }
+
+
+
+
+    @GetMapping("/workplacebron")
+    public String workplaceListBron(@RequestParam(required = true, defaultValue = "") Long workplaceId,Model model) {
+        System.out.println("workplaceListBron---001 "+model + " "+workplaceId);
+        model.addAttribute("allWorkplaceBron", workplaceService.allWorkplaceBronById(workplaceId));
+        return "workplacebron";
+    }
+
+    @PostMapping("/workplacebron")
+    public String bronWorkplace2(
+
+            @RequestParam(required = true, defaultValue = "") Long bronId,
+            @RequestParam(required = true, defaultValue = "") Long workplaceId,
+
+            @RequestParam(required = true, defaultValue = "") String action,
+            Model model) {
+
+        System.out.println("bronWorkplace2---001 bronId=" + bronId);
+        System.out.println("bronWorkplace2---004 workplaceId=" + workplaceId);
+        System.out.println("bronWorkplace2---005 action=" + action);
+
+
+
+        if (action.equals("delete")) {
+            workplaceService.deleteBron(bronId);
+        }
+
+        return "redirect:/workplacebron?workplaceId=" +workplaceId;
+    }
+
+
+
 
     @GetMapping("/bron")
     public String bronList(Model model) {
@@ -96,6 +123,7 @@ public class WorkplaceController {
             workplaceService.bronWorkplaceBron(workplaceId, 4l);
             return "redirect:/bron";
         }
+
 
 
         return "redirect:/bron";

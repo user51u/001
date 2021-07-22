@@ -55,7 +55,7 @@ public class WorkplaceService {
 
     public List<WorkplaceBron> allWorkplaceBronById(Long id) {
         List<WorkplaceBron> workplaceRepositoryAll = workplaceBronRepository.findAll();
-
+        System.out.println("allWorkplaceBronById---001 Id=" + id);
         ArrayList<WorkplaceBron> workplaceRepository = new ArrayList<>();
 
         for (int i = 0; i < workplaceRepositoryAll.size(); i++) {
@@ -65,7 +65,7 @@ public class WorkplaceService {
 
             if (workplaceBron.getNumber()==id) {
                 workplaceRepository.add(workplaceBron);
-            }
+           }
         }
 
 
@@ -206,6 +206,21 @@ public class WorkplaceService {
         if (workplaceRepository.findById(aLong).isPresent()) {
             workplaceRepository.deleteById(aLong);
             return true;
+        }
+        return false;
+    }
+
+  public boolean deleteBron(Long aLong) {
+        System.out.println("deleteBron---001 " + aLong);
+
+        if (workplaceBronRepository.findById(aLong).isPresent()) {
+            System.out.println("deleteBron---005 нашли" );
+            workplaceBronRepository.deleteById(aLong);
+
+            return true;
+        }
+        else {
+            System.out.println("deleteBron---010 не нашли" );
         }
         return false;
     }
