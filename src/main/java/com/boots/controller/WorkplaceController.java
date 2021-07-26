@@ -134,7 +134,7 @@ public class WorkplaceController {
             System.out.println("bronWorkplace1---010 action=" + action + " " + start);
 
             //    model.addAttribute("userForm", new WorkplaceBron());
-            workplaceService.bronWorkplaceBron(workplaceId, 4l);
+            workplaceService.bronWorkplaceBron(workplaceId, start,startTime,stopTime);
             return "redirect:/bron";
         }
 

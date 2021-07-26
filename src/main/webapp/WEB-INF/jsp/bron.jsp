@@ -8,7 +8,7 @@
       <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css">
    </head>
    <body>
-   <form action="${pageContext.request.contextPath}/bron" method="post">
+
 
         <label for="start">Дата начала брони:</label>
         <input type="date" id="start" name="start" requried >
@@ -87,19 +87,10 @@
       <input type="hidden" id="start1" name="start" value="01" />
       <input type="hidden" id="startTime1" name="startTime" value="02" />
       <input type="hidden" id="stopTime1" name="stopTime" value="03" />
-      <input type="hidden" name="action" value="zabron"/>
+      <input type="hidden" id="action" name="action" value="zabron"/>
       <button id= "zabron" type="submit">Забронировать</button>
       </form>
 
-
-
-      <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-      <input type="hidden" id="start1" name="start" value="01" />
-      <input type="hidden" id="startTime1" name="startTime" value="02" />
-      <input type="hidden" id="stopTime1" name="stopTime" value="03" />
-      <input type="hidden" name="action" value="zabron"/>
-      <button id= "zabron" type="submit">Забронировать2</button>
-      </form>
 
 
 
@@ -107,13 +98,17 @@
    document.getElementById('zabron').onclick = function changeContent() {
 
    if ( document.getElementById('start').value === "") {
+     document.getElementById('action').value="error"
     alert("Введите дату");
    }
     else
        {
-           document.getElementById('start1').value =  document.getElementById('start').value;
+        document.getElementById('start1').value =  document.getElementById('start').value;
+
+
             if ( document.getElementById('startTime').value === "")
             {
+             document.getElementById('action').value="error"
             alert("Введите время начала аренды");
             }
             else
@@ -122,6 +117,7 @@
 
                if ( document.getElementById('stopTime').value === "")
                 {
+                 document.getElementById('action').value="error"
                 alert("Введите время конца аренды");
                 }
                 else

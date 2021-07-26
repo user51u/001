@@ -20,8 +20,10 @@
     <th>Пользователь</th>
     <th>Описение</th>
     <th>Старт</th>
+    <th>Старт time</th>
+    <th>Стоп time</th>
 
-    <th>Стоп</th>
+
     </thead>
     <c:forEach items="${allWorkplaceBron}" var="workplacebron">
       <tr>
@@ -29,8 +31,10 @@
         <td>${workplacebron.number}</td>
         <td>${workplacebron.id_user}</td>
         <td>${workplacebron.detail}</td>
-        <td>${workplacebron.date_start2}</td>
-        <td>${workplacebron.date_stop}</td>
+        <td>${workplacebron.date_start3}</td>
+        <td>${workplacebron.time_start}</td>
+        <td>${workplacebron.time_stop}</td>
+
         <td>
 
         </td>

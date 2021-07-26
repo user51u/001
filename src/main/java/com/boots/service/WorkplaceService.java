@@ -167,11 +167,14 @@ public class WorkplaceService {
         return false;
     }
 
-    public boolean bronWorkplaceBron(Long id, Long status) {
+    public boolean bronWorkplaceBron(Long id, String startDate,String startTime,String stopTime) {
         System.out.println("bronWorkplaceBron---001 id=" + id);
         WorkplaceBron workplaceBron = new WorkplaceBron();
         workplaceBron.setNumber(id);
-        workplaceBron.setDate_start2(new java.sql.Date(new Date().getTime()));
+      //  workplaceBron.setDate_start(new java.sql.Date(new Date().getTime()));
+        workplaceBron.setDate_start3(startDate);
+        workplaceBron.setTime_start(startTime);
+        workplaceBron.setTime_stop(stopTime);
         workplaceBronRepository.save(workplaceBron);
         return true;
 

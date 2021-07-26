@@ -15,8 +15,9 @@ public class WorkplaceBron {
     private Long number;
     private Long id_user;
     private String detail;
-    private Date date_start2=null;
-    private Date date_stop=null;
+    private String date_start3=null;
+    private String time_start=null;
+    private String time_stop=null;
 
     public Long getId() {
         return id;
@@ -42,20 +43,28 @@ public class WorkplaceBron {
         this.detail = detail;
     }
 
-    public Date getDate_start2() {
-        return date_start2;
+    public String getDate_start3() {
+        return date_start3;
     }
 
-    public void setDate_start2(Date date_start2) {
-        this.date_start2 = date_start2;
+    public void setDate_start3(String date_start3) {
+        this.date_start3 = date_start3;
     }
 
-    public Date getDate_stop() {
-        return date_stop;
+    public String getTime_start() {
+        return time_start;
     }
 
-    public void setDate_stop(Date date_stop) {
-        this.date_stop = date_stop;
+    public void setTime_start(String time_start) {
+        this.time_start = time_start;
+    }
+
+    public String getTime_stop() {
+        return time_stop;
+    }
+
+    public void setTime_stop(String time_stop) {
+        this.time_stop = time_stop;
     }
 
     public Long getId_user() {
@@ -73,8 +82,9 @@ public class WorkplaceBron {
                 ", number=" + number +
                 ", id_user=" + id_user +
                 ", detail='" + detail + '\'' +
-                ", date_start2=" + date_start2 +
-                ", date_stop=" + date_stop +
+                ", date_start3='" + date_start3 + '\'' +
+                ", time_start='" + time_start + '\'' +
+                ", time_stop='" + time_stop + '\'' +
                 '}';
     }
 }
