@@ -92,27 +92,31 @@ public class WorkplaceController {
     public String bronWorkplace1(
 
             @RequestParam(required = true, defaultValue = "") Long workplaceId,
-            @RequestParam(required = false, defaultValue = "") Long start,
-            @RequestParam(required = false, defaultValue = "") Long stop,
+            @RequestParam(required = false, defaultValue = "") String start1,
+            @RequestParam(required = false, defaultValue = "") String stop,
+            @RequestParam(required = false, defaultValue = "") String startTime,
+            @RequestParam(required = false, defaultValue = "") String stopTime,
             @RequestParam(required = true, defaultValue = "") String action,
             Model model) {
 
-        System.out.println("bronWorkplace1---001 start=" + start);
+        System.out.println("bronWorkplace1---001 start=" + start1);
         System.out.println("bronWorkplace1---001 stop=" + stop);
+        System.out.println("bronWorkplace1---001 startTime=" + startTime);
+        System.out.println("bronWorkplace1---001 stopTime=" + stopTime);
         System.out.println("bronWorkplace1---001 workplaceId=" + workplaceId);
-        System.out.println("bronWorkplace1---005 action=" + action);
+        System.out.println("bronWorkplace1---005 action=|" + action+"|");
 
-        if (action.equals("bron1")) {
+        if (action.equals("setZanato")) {
             System.out.println("bronWorkplace1---010 action=" + action);
             workplaceService.bronWorkplace(workplaceId, 1l);
             return "redirect:/bron";
         }
-        if (action.equals("bron2")) {
+        if (action.equals("setVybrano")) {
             System.out.println("bronWorkplace1---010 action=" + action);
             workplaceService.bronWorkplace(workplaceId, 2l);
             return "redirect:/bron";
         }
-        if (action.equals("bron3")) {
+        if (action.equals("setNedostupno")) {
             System.out.println("bronWorkplace1---010 action=" + action);
             workplaceService.bronWorkplace(workplaceId, 3l);
             return "redirect:/bron";
@@ -128,8 +132,8 @@ public class WorkplaceController {
             return "redirect:/workplacebron?workplaceId="+workplaceId;
         }
 
-        if (action.equals("bron6")) {
-            System.out.println("bronWorkplace1---010 action=" + action + " "+start);
+        if (action.equals("zabron")) {
+            System.out.println("bronWorkplace1---010 action=" + action + " "+start1);
 
         //    model.addAttribute("userForm", new WorkplaceBron());
             workplaceService.bronWorkplaceBron(workplaceId, 4l);

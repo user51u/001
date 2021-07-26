@@ -8,17 +8,24 @@
       <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css">
    </head>
    <body>
-      <form action="${pageContext.request.contextPath}/bron" method="post">
-         <label for="start">Дата начала брони:</label>
-         <input type="date" name="start" id="start" name="trip-start">
+
+
+        <label for="start">Дата начала брони:</label>
+        <input type="date" id="start" name="start"  >
+
+
+        <script>
+           //document.getElementById('start').valueAsDate = new Date();
+        </script
+
 
          <label for="appt">Время начала брони:</label>
-         <input type="time" id="appt" name="appt"
-            min="09:00" max="18:00" required> <br><br>
-         <label for="start">Дата конца брони: </label>
+         <input type="time" id="appt" name="startTime"
+            min="00:00" max="24:00" >
+
          <label for="appt">Время конца брони:</label>
-         <input type="time" id="appt" name="appt"
-            min="09:00" max="18:00" required> <br><br>
+         <input type="time" id="appt" name="stopTime"
+            min="00:00" max="24:00" > <br><br>
          <div>
             <table>
                <thead>
@@ -39,42 +46,66 @@
                         <c:forEach items="${workplace.workplaceStatuses}" var="statusWorkplace">${statusWorkplace.name}    </c:forEach>
                      </td>
                      <td>
+
+
+
       <form action="${pageContext.request.contextPath}/bron" method="post">
       <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-      <input type="hidden" name="action" value="bron1"/>
+      <input type="hidden" name="action" value="setZanato"/>
       <button type="submit">Занято</button>
       </form>
+
+
       <form action="${pageContext.request.contextPath}/bron" method="post">
       <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-      <input type="hidden" name="action" value="bron2"/>
-      <button type="submit">Свободно</button>
-      </form>
-      <form action="${pageContext.request.contextPath}/bron" method="post">
-      <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-      <input type="hidden" name="action" value="bron3"/>
+      <input type="hidden" name="action" value="setVybrano"/>
       <button type="submit">Выбрано</button>
       </form>
+
       <form action="${pageContext.request.contextPath}/bron" method="post">
       <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-      <input type="hidden" name="action" value="bron4"/>
+      <input type="hidden" name="action" value="setVybrano"/>
+      <button type="submit">Выбрано</button>
+      </form>
+
+
+
+      <form action="${pageContext.request.contextPath}/bron" method="post">
+      <input type="hidden" name="workplaceId" value="${workplace.id}"/>
+      <input type="hidden" name="action" value="setNedostupno"/>
       <button type="submit">Недоступно</button>
       </form>
+
+
+
       </td>
-      <td>          <form action="${pageContext.request.contextPath}/bron" method="post">
+      <td>
+
+      <form action="${pageContext.request.contextPath}/bron" method="post">
       <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-      <input type="hidden" name="action" value="bron5"/>
+      <input type="hidden" id="start1" name="start1" value="11111" />
+      <input type="hidden" name="action" value="zabron"/>
+      <button id= "zabron" type="submit">Забронировать</button>
+      </form>
+
+
+
+ <script>
+   document.getElementById('zabron').onclick = function changeContent() {
+   document.getElementById('start1').value =  document.getElementById('start').value;
+}
+  </script
+
+      <form action="${pageContext.request.contextPath}/bron" method="post">
+      <input type="hidden" name="workplaceId" value="${workplace.id}"/>
+      <input type="hidden" name="action" value="listBrone"/>
       <button type="submit">Просмотр брони</button>
       </form>
 
 
 
-      <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-      <input type="hidden" name="stop" value="1234567890"/>
-      <input type="hidden" name="action" value="bron6"/>
-      <button type="submit">Забронировать</button>
 
 
-      </form>
       </td>
       </tr>
       </c:forEach>
@@ -84,5 +115,9 @@
 
       </div>
       </form>
+
+
+
+
    </body>
 </html>
