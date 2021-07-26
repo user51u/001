@@ -8,23 +8,18 @@
       <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css">
    </head>
    <body>
-
+   <form action="${pageContext.request.contextPath}/bron" method="post">
 
         <label for="start">Дата начала брони:</label>
         <input type="date" id="start" name="start" requried >
 
 
-        <script>
-           //document.getElementById('start').valueAsDate = new Date();
-        </script
-
-
          <label for="appt">Время начала брони:</label>
-         <input type="time" id="appt" name="startTime"
+         <input type="time" id="startTime" name="startTime"
             min="00:00" max="24:00" >
 
          <label for="appt">Время конца брони:</label>
-         <input type="time" id="appt" name="stopTime"
+         <input type="time" id="stopTime" name="stopTime"
             min="00:00" max="24:00" > <br><br>
          <div>
             <table>
@@ -89,16 +84,60 @@
 
       <form action="${pageContext.request.contextPath}/bron" method="post">
       <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-      <input type="hidden" id="start1" name="start1" value="11111" />
+      <input type="hidden" id="start1" name="start" value="01" />
+      <input type="hidden" id="startTime1" name="startTime" value="02" />
+      <input type="hidden" id="stopTime1" name="stopTime" value="03" />
       <input type="hidden" name="action" value="zabron"/>
       <button id= "zabron" type="submit">Забронировать</button>
       </form>
 
 
 
-    <script>
+      <input type="hidden" name="workplaceId" value="${workplace.id}"/>
+      <input type="hidden" id="start1" name="start" value="01" />
+      <input type="hidden" id="startTime1" name="startTime" value="02" />
+      <input type="hidden" id="stopTime1" name="stopTime" value="03" />
+      <input type="hidden" name="action" value="zabron"/>
+      <button id= "zabron" type="submit">Забронировать2</button>
+      </form>
+
+
+
+   <script>
    document.getElementById('zabron').onclick = function changeContent() {
-   document.getElementById('start1').value =  document.getElementById('start').value;}
+
+   if ( document.getElementById('start').value === "") {
+    alert("Введите дату");
+   }
+    else
+       {
+           document.getElementById('start1').value =  document.getElementById('start').value;
+            if ( document.getElementById('startTime').value === "")
+            {
+            alert("Введите время начала аренды");
+            }
+            else
+            {
+            document.getElementById('startTime1').value =  document.getElementById('startTime').value;
+
+               if ( document.getElementById('stopTime').value === "")
+                {
+                alert("Введите время конца аренды");
+                }
+                else
+                {
+                document.getElementById('stopTime1').value =  document.getElementById('stopTime').value;
+                }
+
+
+        }
+}
+
+
+
+
+
+   }
    </script
 
 
