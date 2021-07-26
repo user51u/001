@@ -42,11 +42,9 @@ public class WorkplaceController {
     }
 
 
-
-
     @GetMapping("/workplacebron")
-    public String workplaceListBron(@RequestParam(required = true, defaultValue = "") Long workplaceId,Model model) {
-        System.out.println("workplaceListBron---001 "+model + " "+workplaceId);
+    public String workplaceListBron(@RequestParam(required = true, defaultValue = "") Long workplaceId, Model model) {
+        System.out.println("workplaceListBron---001 " + model + " " + workplaceId);
         model.addAttribute("allWorkplaceBron", workplaceService.allWorkplaceBronById(workplaceId));
         return "workplacebron";
     }
@@ -65,12 +63,11 @@ public class WorkplaceController {
         System.out.println("bronWorkplace2---005 action=" + action);
 
 
-
         if (action.equals("delete")) {
             workplaceService.deleteBron(bronId);
         }
 
-        return "redirect:/workplacebron?workplaceId=" +workplaceId;
+        return "redirect:/workplacebron?workplaceId=" + workplaceId;
     }
 
 /*
@@ -104,42 +101,42 @@ public class WorkplaceController {
         System.out.println("bronWorkplace1---001 startTime=" + startTime);
         System.out.println("bronWorkplace1---001 stopTime=" + stopTime);
         System.out.println("bronWorkplace1---001 workplaceId=" + workplaceId);
-        System.out.println("bronWorkplace1---005 action=|" + action+"|");
+        System.out.println("bronWorkplace1---005 action=|" + action + "|");
 
         if (action.equals("setZanato")) {
             System.out.println("bronWorkplace1---010 action=" + action);
             workplaceService.bronWorkplace(workplaceId, 1l);
             return "redirect:/bron";
         }
-        if (action.equals("setVybrano")) {
+        if (action.equals("setSvobodno")) {
             System.out.println("bronWorkplace1---010 action=" + action);
             workplaceService.bronWorkplace(workplaceId, 2l);
             return "redirect:/bron";
         }
-        if (action.equals("setNedostupno")) {
+        if (action.equals("setVybrano")) {
             System.out.println("bronWorkplace1---010 action=" + action);
             workplaceService.bronWorkplace(workplaceId, 3l);
             return "redirect:/bron";
         }
-        if (action.equals("bron4")) {
+        if (action.equals("setNedostupno")) {
             System.out.println("bronWorkplace1---010 action=" + action);
             workplaceService.bronWorkplace(workplaceId, 4l);
             return "redirect:/bron";
         }
-        if (action.equals("bron5")) {
+
+        if (action.equals("listBrone")) {
             System.out.println("bronWorkplace1---010 action=" + action);
             workplaceService.bronWorkplace(workplaceId, 4l);
-            return "redirect:/workplacebron?workplaceId="+workplaceId;
+            return "redirect:/workplacebron?workplaceId=" + workplaceId;
         }
 
         if (action.equals("zabron")) {
-            System.out.println("bronWorkplace1---010 action=" + action + " "+start1);
+            System.out.println("bronWorkplace1---010 action=" + action + " " + start1);
 
-        //    model.addAttribute("userForm", new WorkplaceBron());
+            //    model.addAttribute("userForm", new WorkplaceBron());
             workplaceService.bronWorkplaceBron(workplaceId, 4l);
             return "redirect:/bron";
         }
-
 
 
         return "redirect:/bron";

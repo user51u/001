@@ -11,7 +11,7 @@
 
 
         <label for="start">Дата начала брони:</label>
-        <input type="date" id="start" name="start"  >
+        <input type="date" id="start" name="start" requried >
 
 
         <script>
@@ -55,11 +55,10 @@
       <button type="submit">Занято</button>
       </form>
 
-
       <form action="${pageContext.request.contextPath}/bron" method="post">
       <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-      <input type="hidden" name="action" value="setVybrano"/>
-      <button type="submit">Выбрано</button>
+      <input type="hidden" name="action" value="setSvobodno"/>
+      <button type="submit">Свободно</button>
       </form>
 
       <form action="${pageContext.request.contextPath}/bron" method="post">
@@ -67,8 +66,6 @@
       <input type="hidden" name="action" value="setVybrano"/>
       <button type="submit">Выбрано</button>
       </form>
-
-
 
       <form action="${pageContext.request.contextPath}/bron" method="post">
       <input type="hidden" name="workplaceId" value="${workplace.id}"/>
@@ -81,6 +78,15 @@
       </td>
       <td>
 
+
+      <form action="${pageContext.request.contextPath}/bron" method="post">
+      <input type="hidden" name="workplaceId" value="${workplace.id}"/>
+      <input type="hidden" name="action" value="listBrone"/>
+      <button type="submit">Просмотр брони</button>
+      </form>
+
+
+
       <form action="${pageContext.request.contextPath}/bron" method="post">
       <input type="hidden" name="workplaceId" value="${workplace.id}"/>
       <input type="hidden" id="start1" name="start1" value="11111" />
@@ -90,17 +96,10 @@
 
 
 
- <script>
+    <script>
    document.getElementById('zabron').onclick = function changeContent() {
-   document.getElementById('start1').value =  document.getElementById('start').value;
-}
-  </script
-
-      <form action="${pageContext.request.contextPath}/bron" method="post">
-      <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-      <input type="hidden" name="action" value="listBrone"/>
-      <button type="submit">Просмотр брони</button>
-      </form>
+   document.getElementById('start1').value =  document.getElementById('start').value;}
+   </script
 
 
 
