@@ -4,12 +4,16 @@ import com.boots.entity.Workplace;
 import com.boots.entity.WorkplaceBron;
 import com.boots.service.WorkplaceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 @Controller
 public class WorkplaceController {
@@ -69,8 +73,13 @@ public class WorkplaceController {
         return "redirect:/workplacebron?workplaceId=" +workplaceId;
     }
 
-
-
+/*
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+        sdf.setLenient(true);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+    }*/
 
     @GetMapping("/bron")
     public String bronList(Model model) {
@@ -83,10 +92,13 @@ public class WorkplaceController {
     public String bronWorkplace1(
 
             @RequestParam(required = true, defaultValue = "") Long workplaceId,
-
+            @RequestParam(required = false, defaultValue = "") Long start,
+            @RequestParam(required = false, defaultValue = "") Long stop,
             @RequestParam(required = true, defaultValue = "") String action,
             Model model) {
 
+        System.out.println("bronWorkplace1---001 start=" + start);
+        System.out.println("bronWorkplace1---001 stop=" + stop);
         System.out.println("bronWorkplace1---001 workplaceId=" + workplaceId);
         System.out.println("bronWorkplace1---005 action=" + action);
 
@@ -117,7 +129,7 @@ public class WorkplaceController {
         }
 
         if (action.equals("bron6")) {
-            System.out.println("bronWorkplace1---010 action=" + action);
+            System.out.println("bronWorkplace1---010 action=" + action + " "+start);
 
         //    model.addAttribute("userForm", new WorkplaceBron());
             workplaceService.bronWorkplaceBron(workplaceId, 4l);
