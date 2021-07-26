@@ -9,18 +9,27 @@
    </head>
    <body>
 
+    <form action="${pageContext.request.contextPath}/bron" method="post">
 
-        <label for="start">Дата начала брони:</label>
-        <input type="date" id="start" name="start" requried >
+
+
+
+        <label>Дата начала брони:</label>
+        <input type="date" id="start"  name="start"  required>
 
 
          <label for="appt">Время начала брони:</label>
          <input type="time" id="startTime" name="startTime"
-            min="00:00" max="24:00" >
+            min="00:00" max="24:00"  required>
 
          <label for="appt">Время конца брони:</label>
          <input type="time" id="stopTime" name="stopTime"
-            min="00:00" max="24:00" > <br><br>
+            min="00:00" max="24:00" required >
+             <button id= "проверить" type="submit">Проверить</button>
+
+              </form>
+
+
          <div>
             <table>
                <thead>
@@ -82,9 +91,12 @@
 
 
 
-      <form action="${pageContext.request.contextPath}/bron" method="post">
+
+    <form action="${pageContext.request.contextPath}/bron" method="post">
       <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-      <input type="hidden" id="start1" name="start" value="01" />
+
+      <input type="hidden" id="start1"  name="start"  required>
+
       <input type="hidden" id="startTime1" name="startTime" value="02" />
       <input type="hidden" id="stopTime1" name="stopTime" value="03" />
       <input type="hidden" id="action" name="action" value="zabron"/>
@@ -95,7 +107,7 @@
 
 
    <script>
-   document.getElementById('zabron').onclick = function changeContent() {
+   document.getElementById('zabron111').onclick = function changeContent() {
 
    if ( document.getElementById('start').value === "") {
      document.getElementById('action').value="error"
@@ -127,14 +139,11 @@
 
 
         }
-}
-
-
-
-
-
+   }
    }
    </script
+
+
 
 
 
