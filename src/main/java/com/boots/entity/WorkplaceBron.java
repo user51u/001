@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 
 import java.sql.Date;
-import java.util.Set;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "t_workplace_bron")
@@ -15,7 +15,7 @@ public class WorkplaceBron {
     private Long number;
     private Long id_user;
     private String detail;
-    private Date date_start2=null;
+    private Timestamp date_start2=null;
     private Date date_stop=null;
 
     public Long getId() {
@@ -42,11 +42,11 @@ public class WorkplaceBron {
         this.detail = detail;
     }
 
-    public Date getDate_start2() {
+    public Timestamp getDate_start2() {
         return date_start2;
     }
 
-    public void setDate_start2(Date date_start2) {
+    public void setDate_start2(Timestamp date_start2) {
         this.date_start2 = date_start2;
     }
 

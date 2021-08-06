@@ -85,6 +85,7 @@ public class WorkplaceController {
             @RequestParam(required = true, defaultValue = "") Long workplaceId,
 
             @RequestParam(required = true, defaultValue = "") String action,
+            @RequestParam(required = false, defaultValue = "") String start,
             Model model) {
 
         System.out.println("bronWorkplace1---001 workplaceId=" + workplaceId);
@@ -120,7 +121,7 @@ public class WorkplaceController {
             System.out.println("bronWorkplace1---010 action=" + action);
 
         //    model.addAttribute("userForm", new WorkplaceBron());
-            workplaceService.bronWorkplaceBron(workplaceId, 4l);
+            workplaceService.bronWorkplaceBron(workplaceId, start,4l);
             return "redirect:/bron";
         }
 

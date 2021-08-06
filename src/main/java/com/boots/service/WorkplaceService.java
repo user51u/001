@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -167,11 +170,26 @@ public class WorkplaceService {
         return false;
     }
 
-    public boolean bronWorkplaceBron(Long id, Long status) {
+    public boolean bronWorkplaceBron(Long id, String start, Long status) {
         System.out.println("bronWorkplaceBron---001 id=" + id);
         WorkplaceBron workplaceBron = new WorkplaceBron();
         workplaceBron.setNumber(id);
-        workplaceBron.setDate_start2(new java.sql.Date(new Date().getTime()));
+       // workplaceBron.setDate_start2(new java.sql.Date(new Date().getTime()));
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
+        Date convertedCurrentDate = null;
+        try {
+            convertedCurrentDate = simpleDateFormat.parse(start);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        //Date convertedCurrentDate = simpleDateFormat.parse("2013-09-18");
+      //  String date=simpleDateFormat.format(convertedCurrentDate );
+
+
+        Timestamp timestamp = new Timestamp(convertedCurrentDate.getTime());
+        System.out.println("bronWorkplaceBron---005 convertedCurrentDate=" + convertedCurrentDate + " "+timestamp);
+        workplaceBron.setDate_start2(timestamp);
         workplaceBronRepository.save(workplaceBron);
         return true;
 
