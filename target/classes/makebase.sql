@@ -8,7 +8,3 @@ INSERT INTO public.t_role(id, name)
 --    тест
 
 -- 12345678
-
---    тест
-
--- 12345678
