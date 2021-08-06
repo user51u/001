@@ -170,16 +170,18 @@ public class WorkplaceService {
         return false;
     }
 
-    public boolean bronWorkplaceBron(Long id, String start, Long status) {
+    public boolean bronWorkplaceBron(Long id, String start, String stop, Long status) {
         System.out.println("bronWorkplaceBron---001 id=" + id);
         WorkplaceBron workplaceBron = new WorkplaceBron();
         workplaceBron.setNumber(id);
        // workplaceBron.setDate_start2(new java.sql.Date(new Date().getTime()));
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
-        Date convertedCurrentDate = null;
+        Date convertedCurrentDateStart = null;
+        Date convertedCurrentDateStop = null;
         try {
-            convertedCurrentDate = simpleDateFormat.parse(start);
+            convertedCurrentDateStart = simpleDateFormat.parse(start);
+            convertedCurrentDateStop = simpleDateFormat.parse(stop);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -187,9 +189,11 @@ public class WorkplaceService {
       //  String date=simpleDateFormat.format(convertedCurrentDate );
 
 
-        Timestamp timestamp = new Timestamp(convertedCurrentDate.getTime());
-        System.out.println("bronWorkplaceBron---005 convertedCurrentDate=" + convertedCurrentDate + " "+timestamp);
-        workplaceBron.setDate_start2(timestamp);
+        Timestamp timestampStart = new Timestamp(convertedCurrentDateStart.getTime());
+        Timestamp timestampStop = new Timestamp(convertedCurrentDateStop.getTime());
+        //System.out.println("bronWorkplaceBron---005 convertedCurrentDate=" + convertedCurrentDate + " "+timestamp);
+        workplaceBron.setDate_start2(timestampStart);
+        workplaceBron.setDate_stop(timestampStop);
         workplaceBronRepository.save(workplaceBron);
         return true;
 

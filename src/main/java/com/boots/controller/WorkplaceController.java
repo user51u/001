@@ -86,10 +86,12 @@ public class WorkplaceController {
 
             @RequestParam(required = true, defaultValue = "") String action,
             @RequestParam(required = false, defaultValue = "") String start,
+            @RequestParam(required = false, defaultValue = "") String stop,
             Model model) {
 
-        System.out.println("bronWorkplace1---001 workplaceId=" + workplaceId);
-        System.out.println("bronWorkplace1---005 action=" + action);
+        System.out.println("bronWorkplace1---001 "+ start + " "+ stop);
+        System.out.println("bronWorkplace1---005 workplaceId=" + workplaceId);
+        System.out.println("bronWorkplace1---010 action=" + action);
 
         if (action.equals("bron1")) {
             System.out.println("bronWorkplace1---010 action=" + action);
@@ -118,10 +120,10 @@ public class WorkplaceController {
         }
 
         if (action.equals("bron6")) {
-            System.out.println("bronWorkplace1---010 action=" + action);
+            System.out.println("bronWorkplace1---030 action=" + action);
 
         //    model.addAttribute("userForm", new WorkplaceBron());
-            workplaceService.bronWorkplaceBron(workplaceId, start,4l);
+            workplaceService.bronWorkplaceBron(workplaceId, start,stop,4l);
             return "redirect:/bron";
         }
 

@@ -3,7 +3,6 @@ package com.boots.entity;
 import javax.persistence.*;
 
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
@@ -16,7 +15,7 @@ public class WorkplaceBron {
     private Long id_user;
     private String detail;
     private Timestamp date_start2=null;
-    private Date date_stop=null;
+    private Timestamp date_stop=null;
 
     public Long getId() {
         return id;
@@ -50,11 +49,11 @@ public class WorkplaceBron {
         this.date_start2 = date_start2;
     }
 
-    public Date getDate_stop() {
+    public Timestamp getDate_stop() {
         return date_stop;
     }
 
-    public void setDate_stop(Date date_stop) {
+    public void setDate_stop(Timestamp date_stop) {
         this.date_stop = date_stop;
     }
 

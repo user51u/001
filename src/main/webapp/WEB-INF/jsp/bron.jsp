@@ -21,17 +21,17 @@
 <input type="time" id="startTime" > <br><br>
 
 
-<label for="start">Дата конца брони: </label>
 
-<input type="date" id="start" name="trip-start"
+<label for="stop">Дата конца брони: </label>
+
+<input type="date" id="stop" name="trip-start"
        value="2018-07-22"
        min="2021-06-01">
 
 
-<label for="appt">Время конца брони:</label>
+<label for="stopTime">Время конца брони:</label>
 
-<input type="time" id="appt" name="appt"
-       min="09:00" max="18:00" required> <br><br>
+<input type="time" id="stopTime" > <br><br>
 
 
 <button ondblclick="My_Date()">Return Date</button>
@@ -104,8 +104,9 @@
 
                     <form action="${pageContext.request.contextPath}/bron" method="post">
                         <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-                        <input type="hidden" id="start1" name="start" value="1234567890"/>
-                        <input type="hidden" name="stop" value="1234567890"/>
+                        <input type="hidden" id="stopTmp" name="stop" value="1234567890"/>
+                        <input type="hidden" id="startTmp" name="start" value="1234567890"/>
+
                         <input type="hidden" name="action" value="bron6"/>
                         <button id="br1" onclick="My_Date1()" type="submit">Забронировать</button>
                     </form>
@@ -125,20 +126,13 @@
 
 
          function My_Date1() {
-          document.getElementById('start1').value=document.getElementById('start').value+ "-" +document.getElementById('startTime').value ;
-          alert( document.getElementById('start1').value );
+
+          document.getElementById('startTmp').value=document.getElementById('start').value+ "-" +document.getElementById('startTime').value ;
+          document.getElementById('stopTmp').value=document.getElementById('stop').value+ "-" +document.getElementById('stopTime').value ;
+          alert( document.getElementById('stopTmp').value );
         }
 
-     document.getElementById('br111').onclick = function changeContent1()
-      {
 
-      alert( "|"+document.getElementById('start1').value +"|");
-
-      }
-      document.getElementById('zabron33').onclick = function changeContent2()
-      {
-      alert("002");
-      }
 
 
 
