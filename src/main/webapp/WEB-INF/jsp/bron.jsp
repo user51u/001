@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Log in with your account</title>
+    <title>Бронирование рабочего места</title>
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css">
 </head>
 
@@ -18,8 +18,7 @@
 
 <label for="appt">Время начала брони:</label>
 
-<input type="time" id="startTime" > <br><br>
-
+<input type="time" id="startTime"> <br><br>
 
 
 <label for="stop">Дата конца брони: </label>
@@ -31,7 +30,7 @@
 
 <label for="stopTime">Время конца брони:</label>
 
-<input type="time" id="stopTime" > <br><br>
+<input type="time" id="stopTime"> <br><br>
 
 
 <button ondblclick="My_Date()">Return Date</button>
@@ -40,10 +39,58 @@
 
 
 <script>
+
+function color(){
+   var x = document.getElementsByTagName('td');
+   for(i=0;i<x.length;i++) {
+     x[i].style.backgroundColor ="blue";
+   }
+}
+function color1(st){
+
+if (st===1){
+
+  return "#FF0000"
+}
+
+if (st===2){
+
+  return "#00FF00"
+}
+
+if (st===3){
+
+  return "#0000FF"
+}
+
+if (st===4){
+
+  return "#00FFFF"
+}
+
+
+
+
+
+}
+function clearit(){
+   var x = document.getElementsByTagName('td');
+   for(i=0;i<x.length;i++) {
+     x[i].style.backgroundColor = "";
+   }
+}
+
+
+
+
+
+
         function My_Date() {
         var g =    document.getElementById("start").value;
         document.getElementById('test').innerHTML= g;
         }
+
+
 
 </script>
 
@@ -52,8 +99,8 @@
     <table>
         <thead>
         <th>ID</th>
-        <th>Номер</th>
-        <th>Описение</th>
+        <th>№ рабочего места</th>
+        <th>Описание</th>
         <th>Статус</th>
 
         <th>Статус</th>
@@ -64,7 +111,17 @@
                 <td>${workplace.number}</td>
                 <td>${workplace.detail}</td>
                 <td>${workplace.status}</td>
-                <td>${workplace.status}</td>
+
+
+
+                <td id="${workplace.id}">${workplace.status}</td>
+
+                <script>
+                //alert( color1());
+                document.getElementById(${workplace.id}).style.backgroundColor=color1(${workplace.status});
+
+
+                </script>
                 <td>
                     <c:forEach items="${workplace.workplaceStatuses}" var="statusWorkplace">${statusWorkplace.name}
                     </c:forEach>
@@ -76,11 +133,15 @@
                         <input type="hidden" name="action" value="bron1"/>
                         <button type="submit">Занято</button>
                     </form>
+
+
                     <form action="${pageContext.request.contextPath}/bron" method="post">
                         <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-                        <input type="hidden" ;name="action" value="bron2"/>
+                        <input type="hidden" name="action" value="bron2"/>
                         <button type="submit">Свободно</button>
                     </form>
+
+
                     <form action="${pageContext.request.contextPath}/bron" method="post">
                         <input type="hidden" name="workplaceId" value="${workplace.id}"/>
                         <input type="hidden" name="action" value="bron3"/>
@@ -131,6 +192,8 @@
           document.getElementById('stopTmp').value=document.getElementById('stop').value+ "-" +document.getElementById('stopTime').value ;
           alert( document.getElementById('stopTmp').value );
         }
+
+
 
 
 

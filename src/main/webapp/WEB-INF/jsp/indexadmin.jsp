@@ -5,7 +5,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>Главная</title>
+  <title>Настройки</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css">
 </head>
@@ -15,7 +15,7 @@
 
   <h4><a href="/regwor">Регистрация рабчего места</a></h4>
   <h4><a href="/workplace">Рабочие места</a></h4>
-  <h4><a href="/admin">Пользователи (только админ)</a></h4>
+  <h4><a href="/admin">Пользователи </a></h4>
 
 </div>
 </body>

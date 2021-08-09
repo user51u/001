@@ -191,10 +191,14 @@ public class WorkplaceService {
 
         Timestamp timestampStart = new Timestamp(convertedCurrentDateStart.getTime());
         Timestamp timestampStop = new Timestamp(convertedCurrentDateStop.getTime());
-        //System.out.println("bronWorkplaceBron---005 convertedCurrentDate=" + convertedCurrentDate + " "+timestamp);
+        long dt = timestampStop.getTime() - timestampStart.getTime();
+        System.out.println("bronWorkplaceBron---005 dt=" + dt);
         workplaceBron.setDate_start2(timestampStart);
         workplaceBron.setDate_stop(timestampStop);
         workplaceBronRepository.save(workplaceBron);
+
+        String message = "Некорректно введена дата";
+        
         return true;
 
 
