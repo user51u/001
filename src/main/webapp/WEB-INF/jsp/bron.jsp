@@ -9,36 +9,75 @@
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css">
 </head>
 
-<body>
+
 <label for="start">Дата начала брони:</label>
 
-<input type="date" id="start" name="trip-start"
-       value="2018-07-22"
-       min="2021-06-01">
 
-<label for="appt">Время начала брони:</label>
+<form action="${pageContext.request.contextPath}/bron" method="post">
 
-<input type="time" id="startTime"> <br><br>
+    <input type="date" required = true id="start" name="trip-start"
+           value="2018-07-22"
+           min="2021-06-01">
 
+    <label for="appt">Время начала брони:</label>
 
-<label for="stop">Дата конца брони: </label>
-
-<input type="date" id="stop" name="trip-start"
-       value="2018-07-22"
-       min="2021-06-01">
+    <input type="time" required = true id="startTime"> <br><br>
 
 
-<label for="stopTime">Время конца брони:</label>
+    <label for="stop">Дата конца брони: </label>
 
-<input type="time" id="stopTime"> <br><br>
+    <input type="date" required = true id="stop" name="trip-start"
 
 
-<button ondblclick="My_Date()">Return Date</button>
+           min="2021-06-01">
+
+
+    <label for="stopTime">Время конца брони:</label>
+
+    <input type="time" required = true id="stopTime"> <br><br>
+    <input type="hidden" name="workplaceId" value="${workplace.id}"/>
+    <input type="hidden" name="action" value="bron5555"/>
+    <button  onclick="My_Date()" type="submit">Проверить</button>
+</form>
+
+
+<button  onclick="My_Date2()" >Проверить1</button>
+
 
 <p id="test"></p>
 
 
 <script>
+
+        function My_Date2() {
+        var a = new Date();
+        var year = a.toLocaleString().substring(6, 10);
+        var month = a.toLocaleString().substring(3, 5);
+        var day = a.toLocaleString().substring(0, 2);
+        var a1 = year + "-"+ month +"-"+ day;
+        document.getElementById('start').value= a1;
+        document.getElementById('start').min= a1;
+
+
+
+
+        }
+  function My_Date() {
+
+        var birthday = new Date('1995-12-17T03:24:00');
+         var x=document.getElementById('start').value+ "T" +document.getElementById('startTime').value ;
+           var y=document.getElementById('stop').value+ "T" +document.getElementById('stopTime').value ;
+        var x1 = new Date(x);
+        var y1 = new Date(y);
+        var dt = y1 - x1;
+        var g =    document.getElementById("start").value;
+        document.getElementById('test').innerHTML= g;
+         alert( dt );
+
+
+
+        }
+
 
 function color(){
    var x = document.getElementsByTagName('td');
@@ -84,11 +123,6 @@ function clearit(){
 
 
 
-
-        function My_Date() {
-        var g =    document.getElementById("start").value;
-        document.getElementById('test').innerHTML= g;
-        }
 
 
 
@@ -201,7 +235,7 @@ function clearit(){
 
 </script>
 
-
+<body onload="My_Date2();">
 </body>
 
 
