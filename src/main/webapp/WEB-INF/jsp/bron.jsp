@@ -10,11 +10,9 @@
 </head>
 
 
-<label for="start">Дата начала брони:</label>
-
 
 <form action="${pageContext.request.contextPath}/bron" method="post">
-
+    <label for="start">Дата начала брони:</label>
     <input type="date" required = true id="start" name="trip-start"
            value="2018-07-22"
            min="2021-06-01">
@@ -40,8 +38,6 @@
     <button  onclick="My_Date()" type="submit">Проверить</button>
 </form>
 
-
-<button  onclick="My_Date2()" >Проверить1</button>
 
 
 <p id="test"></p>
@@ -72,11 +68,19 @@
         var dt = y1 - x1;
         var g =    document.getElementById("start").value;
         document.getElementById('test').innerHTML= g;
-         alert( dt );
 
+        if(dt<0){
+         alert( "Дата/время конца брони должно быть позже начала брони" );
+}
+else
+{
 
+             document.getElementById('startTmp').value=document.getElementById('start').value+ "-" +document.getElementById('startTime').value ;
+          document.getElementById('stopTmp').value=document.getElementById('stop').value+ "-" +document.getElementById('stopTime').value ;
+}
 
         }
+
 
 
 function color(){
@@ -203,7 +207,7 @@ function clearit(){
                         <input type="hidden" id="startTmp" name="start" value="1234567890"/>
 
                         <input type="hidden" name="action" value="bron6"/>
-                        <button id="br1" onclick="My_Date1()" type="submit">Забронировать</button>
+                        <button id="br1" onclick="My_Date()" type="submit">Забронировать</button>
                     </form>
 
 
