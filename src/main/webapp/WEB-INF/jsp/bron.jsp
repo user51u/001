@@ -203,10 +203,10 @@ function clearit(){
 
                     <form action="${pageContext.request.contextPath}/bron" method="post">
                         <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-                        <input type="hidden" id="startTmp" name="start" value="1234567890"/>
-                        <input type="hidden" id="stopTmp" name="stop" value="1234567890"/>
+                        <input type="hidden" id="startTmp${workplace.id}" name="start" value="1234567890"/>
+                        <input type="hidden" id="stopTmp${workplace.id}" name="stop" value="1234567890"/>
                         <input type="hidden" name="action" value="bron6"/>
-                        <button id="br1" onclick="My_Date1()" type="submit">Забронировать</button>
+                        <button id="br1" onclick="My_Date1(${workplace.id})" type="submit">Забронировать</button>
                     </form>
 
 
@@ -223,11 +223,11 @@ function clearit(){
 
 
 
-         function My_Date1() {
+         function My_Date1(id) {
 
-          document.getElementById('startTmp').value=document.getElementById('start').value+ "-" +document.getElementById('startTime').value ;
-          document.getElementById('stopTmp').value=document.getElementById('stop').value+ "-" +document.getElementById('stopTime').value ;
-          alert( document.getElementById('startTmp').value +" "+ document.getElementById('stopTmp').value );
+          document.getElementById('startTmp'+id).value=document.getElementById('start').value+ "-" +document.getElementById('startTime').value ;
+          document.getElementById('stopTmp'+id).value=document.getElementById('stop').value+ "-" +document.getElementById('stopTime').value ;
+          alert( document.getElementById('startTmp'+id).value +" "+ document.getElementById('stopTmp'+id).value );
         }
 
 
