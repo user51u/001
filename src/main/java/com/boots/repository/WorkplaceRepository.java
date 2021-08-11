@@ -12,10 +12,10 @@ import java.util.Optional;
 public interface WorkplaceRepository extends JpaRepository<Workplace, Long> {
 
     //   @Query(value ="SELECT * FROM public.t_workplace_bron where number = :number", nativeQuery = true)
-    @Query(value = "SELECT * FROM public.t_workplace_bron\n" +
+    @Query(value = "SELECT number FROM public.t_workplace_bron\n" +
             "where\n" +
             "date_start2 > '2021-08-10 09:15:00' and date_start2 < '2021-08-10 15:45:00'\n" +
             "or\n" +
             "date_stop > '2021-08-10 09:15:00' and date_stop < '2021-08-10 15:45:00'", nativeQuery = true)
-    List<Workplace> getWorkplaceBusy(@Param(value = "start") String start, @Param(value = "stop") String stop);
+    List<Integer> getWorkplaceBusy(@Param(value = "start") String start, @Param(value = "stop") String stop);
 }

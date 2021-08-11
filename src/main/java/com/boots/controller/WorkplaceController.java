@@ -2,6 +2,7 @@ package com.boots.controller;
 
 import com.boots.entity.Workplace;
 import com.boots.entity.WorkplaceBron;
+import com.boots.entity.WorkplaceStatus;
 import com.boots.repository.WorkplaceBronRepository;
 import com.boots.repository.WorkplaceRepository;
 import com.boots.service.WorkplaceService;
@@ -12,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -24,6 +27,7 @@ public class WorkplaceController {
 
     @Autowired
     private WorkplaceRepository workplaceRepository;
+    private List<Integer> checkWorkplaceList=new ArrayList<>();
 
     @GetMapping("/workplace")
     public String workplaceList(Model model) {
@@ -67,7 +71,7 @@ public class WorkplaceController {
     public String workplaceListBron(@RequestParam(required = true, defaultValue = "") int workplaceId, Model model) {
         System.out.println("workplaceListBron---001 " + model + " " + workplaceId);
 
-        List<WorkplaceBron> workplaceBronList = workplaceRepository.getWorkplaceById(workplaceId);
+        List<WorkplaceBron> workplaceBronList = workplaceBronRepository.getWorkplaceById(workplaceId);
         model.addAttribute("allWorkplaceBron", workplaceBronList);
 
 
@@ -100,7 +104,37 @@ public class WorkplaceController {
     @GetMapping("/bron")
     public String bronList(Model model) {
         System.out.println("workplaceList---001 ");
-        model.addAttribute("allWorkplace", workplaceService.allWorkplace());
+
+//        List<Integer> workplaceList =workplaceRepository.getWorkplaceBusy(start,stop);
+//        System.out.println("bronWorkplace1---052 workplaceList.size()=" +workplaceList.size());
+//
+
+        List<Workplace> workplaceList = workplaceService.allWorkplace();
+
+
+        for (int i1 = 0; i1 < checkWorkplaceList.size(); i1++) {
+            System.out.println("bronWorkplace1---005 checkWorkplaceList.get(i1)=" +checkWorkplaceList.get(i1));
+        }
+
+
+        for (int i = 0; i < workplaceList.size(); i++) {
+            System.out.println("bronWorkplace1---010 workplaceList.get(i)=" + workplaceList.get(i));
+            workplaceList.get(i).setStatus(2L);
+
+             for (int i1 = 0; i1 < checkWorkplaceList.size(); i1++) {
+                 System.out.println("bronWorkplace1---015|" +workplaceList.get(i).getNumber()+"|"+checkWorkplaceList.get(i1).longValue()+"|");
+                 if(workplaceList.get(i).getId()==checkWorkplaceList.get(i1).longValue())
+                 {
+                     workplaceList.get(i).setStatus(1l);
+                     System.out.println("bronWorkplace1---020|" +workplaceList.get(i).getNumber()+"|"+checkWorkplaceList.get(i1).longValue()+"|");
+
+                 }
+             }
+
+
+
+        }
+        model.addAttribute("allWorkplace",workplaceList );
         return "bron";
     }
 
@@ -158,11 +192,11 @@ public class WorkplaceController {
 
             //    model.addAttribute("userForm", new WorkplaceBron());
 
-            List<Workplace> workplaceList =workplaceRepository.getWorkplaceBusy(start,stop);
+           checkWorkplaceList =workplaceRepository.getWorkplaceBusy(start,stop);
+            System.out.println("bronWorkplace1---052 workplaceList.size()=" +checkWorkplaceList.size());
 
-
-            for (int i = 0; i < workplaceList.size(); i++) {
-                System.out.println("bronWorkplace1---055 " +  workplaceList.get(i));
+            for (int i = 0; i < checkWorkplaceList.size(); i++) {
+                System.out.println("bronWorkplace1---055 " +  checkWorkplaceList.get(i));
             }
 
 
