@@ -2,6 +2,8 @@ package com.boots.controller;
 
 import com.boots.entity.Workplace;
 import com.boots.entity.WorkplaceBron;
+import com.boots.repository.WorkplaceBronRepository;
+import com.boots.repository.WorkplaceRepository;
 import com.boots.service.WorkplaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,11 +12,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class WorkplaceController {
     @Autowired
     private WorkplaceService workplaceService;
+
+    @Autowired
+    private WorkplaceBronRepository workplaceBronRepository;
+
+    @Autowired
+    private WorkplaceRepository workplaceRepository;
 
     @GetMapping("/workplace")
     public String workplaceList(Model model) {
@@ -38,12 +47,31 @@ public class WorkplaceController {
     }
 
 
-
+//    @GetMapping("/film")
+//    public ResponseEntity<List<Film>> getAllTutorials(@RequestParam(required = false) String title) {
+//        try {
+//
+//            EntityManager em = emf.createEntityManager();
+//            List<Film> films = em
+//                    .createQuery("SELECT f.id, f.title, p.title, g.title FROM Film f, Produsser p, Genre g WHERE f.id_genre =g.id and f.id_produsser =p.id")
+//                    .getResultList();
+//
+//
+//            return new ResponseEntity<>(films, HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
     @GetMapping("/workplacebron")
-    public String workplaceListBron(@RequestParam(required = true, defaultValue = "") Long workplaceId,Model model) {
-        System.out.println("workplaceListBron---001 "+model + " "+workplaceId);
-        model.addAttribute("allWorkplaceBron", workplaceService.allWorkplaceBronById(workplaceId));
+    public String workplaceListBron(@RequestParam(required = true, defaultValue = "") int workplaceId, Model model) {
+        System.out.println("workplaceListBron---001 " + model + " " + workplaceId);
+
+        List<WorkplaceBron> workplaceBronList = workplaceRepository.getWorkplaceById(workplaceId);
+        model.addAttribute("allWorkplaceBron", workplaceBronList);
+
+
+       // model.addAttribute("allWorkplaceBron", workplaceService.allWorkplaceBronById(workplaceId));
         return "workplacebron";
     }
 
@@ -61,15 +89,12 @@ public class WorkplaceController {
         System.out.println("bronWorkplace2---005 action=" + action);
 
 
-
         if (action.equals("delete")) {
             workplaceService.deleteBron(bronId);
         }
 
-        return "redirect:/workplacebron?workplaceId=" +workplaceId;
+        return "redirect:/workplacebron?workplaceId=" + workplaceId;
     }
-
-
 
 
     @GetMapping("/bron")
@@ -89,7 +114,7 @@ public class WorkplaceController {
             @RequestParam(required = false, defaultValue = "") String stop,
             Model model) {
 
-        System.out.println("bronWorkplace1---001 "+ start + " "+ stop);
+        System.out.println("bronWorkplace1---001 " + start + " " + stop);
         System.out.println("bronWorkplace1---005 workplaceId=" + workplaceId);
         System.out.println("bronWorkplace1---010 action=" + action);
 
@@ -116,16 +141,38 @@ public class WorkplaceController {
         if (action.equals("bron5")) {
             System.out.println("bronWorkplace1---010 action=" + action);
             workplaceService.bronWorkplace(workplaceId, 4l);
-            return "redirect:/workplacebron?workplaceId="+workplaceId;
+            return "redirect:/workplacebron?workplaceId=" + workplaceId;
         }
 
         if (action.equals("bron6")) {
             System.out.println("bronWorkplace1---030 action=" + action);
 
-        //    model.addAttribute("userForm", new WorkplaceBron());
-            workplaceService.bronWorkplaceBron(workplaceId, start,stop,4l);
+            //    model.addAttribute("userForm", new WorkplaceBron());
+            workplaceService.bronWorkplaceBron(workplaceId, start, stop, 4l);
             return "redirect:/bron";
         }
+
+
+        if (action.equals("bron5555")) {
+            System.out.println("bronWorkplace1---050 action=" + action);
+
+            //    model.addAttribute("userForm", new WorkplaceBron());
+
+            List<Workplace> workplaceList =workplaceRepository.getWorkplaceBusy(start,stop);
+
+
+            for (int i = 0; i < workplaceList.size(); i++) {
+                System.out.println("bronWorkplace1---055 " +  workplaceList.get(i));
+            }
+
+
+//            model.addAttribute("allWorkplaceBron", workplaceBronList);
+//
+//            workplaceService.checkWorkplaceBron(workplaceId, start, stop, 4l);
+            return "redirect:/bron";
+        }
+
+
 
 
 

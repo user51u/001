@@ -35,6 +35,8 @@
     <input type="time" required = true id="stopTime"> <br><br>
     <input type="hidden" name="workplaceId" value="${workplace.id}"/>
     <input type="hidden" name="action" value="bron5555"/>
+    <input type="hidden" id="startTmp" name="start" value="1234567890"/>
+    <input type="hidden" id="stopTmp" name="stop" value="1234567890"/>
     <button  onclick="My_Date()" type="submit">Проверить</button>
 </form>
 
@@ -61,13 +63,15 @@
   function My_Date() {
 
         var birthday = new Date('1995-12-17T03:24:00');
-         var x=document.getElementById('start').value+ "T" +document.getElementById('startTime').value ;
+        var x=document.getElementById('start').value+ "T" +document.getElementById('startTime').value ;
            var y=document.getElementById('stop').value+ "T" +document.getElementById('stopTime').value ;
         var x1 = new Date(x);
         var y1 = new Date(y);
         var dt = y1 - x1;
         var g =    document.getElementById("start").value;
         document.getElementById('test').innerHTML= g;
+
+
 
         if(dt<0){
          alert( "Дата/время конца брони должно быть позже начала брони" );
@@ -77,6 +81,8 @@ else
 
              document.getElementById('startTmp').value=document.getElementById('start').value+ "-" +document.getElementById('startTime').value ;
           document.getElementById('stopTmp').value=document.getElementById('stop').value+ "-" +document.getElementById('stopTime').value ;
+
+
 }
 
         }

@@ -35,6 +35,11 @@ public class WorkplaceService {
   */
 
 
+
+
+
+
+
     public List<WorkplaceBron> allWorkplaceBron() {
         List<WorkplaceBron> workplaceRepositoryAll = workplaceBronRepository.findAll();
 
@@ -57,7 +62,9 @@ public class WorkplaceService {
     }
 
     public List<WorkplaceBron> allWorkplaceBronById(Long id) {
-        List<WorkplaceBron> workplaceRepositoryAll = workplaceBronRepository.findAll();
+
+       // List<WorkplaceBron> workplaceRepositoryAll = workplaceBronRepository.findById(id);
+        List<WorkplaceBron> workplaceRepositoryAll = workplaceBronRepository.findAll(); //БЫЛО
         System.out.println("allWorkplaceBronById---001 Id=" + id);
         ArrayList<WorkplaceBron> workplaceRepository = new ArrayList<>();
 
@@ -170,7 +177,7 @@ public class WorkplaceService {
         return false;
     }
 
-    public boolean bronWorkplaceBron(Long id, String start, String stop, Long status) {
+    public boolean checkWorkplaceBron(Long id, String start, String stop, Long status) {
         System.out.println("bronWorkplaceBron---001 id=" + id);
         WorkplaceBron workplaceBron = new WorkplaceBron();
         workplaceBron.setNumber(id);
@@ -199,6 +206,61 @@ public class WorkplaceService {
 
         String message = "Некорректно введена дата";
         
+        return true;
+
+
+        //  Optional<WorkplaceBron> workplaceRepositoryById = workplaceBronRepository.findById(id);
+
+        //  if (workplaceRepositoryById.isPresent()) {
+        //      WorkplaceBron workplaceBron = workplaceRepositoryById.get();
+//            workplace.setStatus(status);
+//            Set<WorkplaceStatus> workplaceStatuses = workplaceRepositoryById.get().getWorkplaceStatuses();
+//            System.out.println("bronWorkplace---005 найден " + id + " " + workplaceRepositoryById);
+//            System.out.println("bronWorkplace---010 найден " + id + " " + workplaceRepositoryById.get());
+//            System.out.println("bronWorkplace---015 найден " + workplaceStatuses );
+//            workplaceStatuses.clear();
+//            workplaceStatuses.add(new WorkplaceStatus(status, "ROLE_USER"));
+
+        //   workplaceRepositoryById.get().setWorkplaceStatuses(Collections.singleton(new WorkplaceStatus()));
+//            System.out.println("bronWorkplace---015 найден " + id + " " + workplaceRepositoryById);
+//            System.out.println("bronWorkplace---020 найден " + id + " " + workplaceRepositoryById.get());
+//            System.out.println("bronWorkplace---025 workplaceRepository " + workplaceRepository);
+        //   workplace.setWorkplaceStatuses(Collections.singleton(new WorkplaceStatus(1L, "ROLE_USER")));
+        //     workplace.setWorkplaceStatuses(workplaceStatuses);
+        //      workplaceBronRepository.save( workplaceBron);
+        //     return true;
+        //  }
+        //  return false;
+    }
+   public boolean bronWorkplaceBron(Long id, String start, String stop, Long status) {
+        System.out.println("bronWorkplaceBron---001 id=" + id);
+        WorkplaceBron workplaceBron = new WorkplaceBron();
+        workplaceBron.setNumber(id);
+       // workplaceBron.setDate_start2(new java.sql.Date(new Date().getTime()));
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
+        Date convertedCurrentDateStart = null;
+        Date convertedCurrentDateStop = null;
+        try {
+            convertedCurrentDateStart = simpleDateFormat.parse(start);
+            convertedCurrentDateStop = simpleDateFormat.parse(stop);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        //Date convertedCurrentDate = simpleDateFormat.parse("2013-09-18");
+      //  String date=simpleDateFormat.format(convertedCurrentDate );
+
+
+        Timestamp timestampStart = new Timestamp(convertedCurrentDateStart.getTime());
+        Timestamp timestampStop = new Timestamp(convertedCurrentDateStop.getTime());
+        long dt = timestampStop.getTime() - timestampStart.getTime();
+        System.out.println("bronWorkplaceBron---005 dt=" + dt);
+        workplaceBron.setDate_start2(timestampStart);
+        workplaceBron.setDate_stop(timestampStop);
+        workplaceBronRepository.save(workplaceBron);
+
+        String message = "Некорректно введена дата";
+
         return true;
 
 
