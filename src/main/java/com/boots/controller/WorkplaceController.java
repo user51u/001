@@ -107,11 +107,10 @@ public class WorkplaceController {
 
     public String bronList(Model model,
                            @RequestParam(required = false, defaultValue = "1") String start,
-                           @RequestParam(required = false, defaultValue = "2") String stop,
-                           @RequestParam(required = false, defaultValue = "3") String startTime,
-                           @RequestParam(required = false, defaultValue = "4") String stoptTime
+                           @RequestParam(required = false, defaultValue = "2") String stop
+
     ) {
-        System.out.println("bronList---001 "+start + " "+ stop + " "+startTime +" "+stoptTime);
+        System.out.println("bronList---001 "+start + " "+ stop );
 
         List<Workplace> workplaceList = workplaceService.allWorkplace();
         for (int i1 = 0; i1 < checkWorkplaceList.size(); i1++) {
@@ -120,7 +119,7 @@ public class WorkplaceController {
 
         for (int i = 0; i < workplaceList.size(); i++) {
             System.out.println("bronWorkplace1---010 workplaceList.get(i)=" + workplaceList.get(i));
-            workplaceList.get(i).setStatus(2L);
+            workplaceList.get(i).setStatus(0L);
 
              for (int i1 = 0; i1 < checkWorkplaceList.size(); i1++) {
                  System.out.println("bronWorkplace1---015|" +workplaceList.get(i).getNumber()+"|"+checkWorkplaceList.get(i1).longValue()+"|");
@@ -133,10 +132,7 @@ public class WorkplaceController {
              }
         }
         model.addAttribute("allWorkplace",workplaceList );
-        model.addAttribute("start",start );
-        model.addAttribute("stop",stop );
-        model.addAttribute("startTime",startTime);
-        model.addAttribute("stopTime",stoptTime);
+
         return "bron";
     }
 

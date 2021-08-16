@@ -3,7 +3,7 @@ INSERT INTO public.t_role(id, name)
 
 
   INSERT INTO public.t_status_workplace(id, name)
-    VALUES (1, 'занято'), (2, 'свободно'), (3, 'выбрано'), (4, 'недоступно');
+    VALUES  (0, 'неизвестен'), (1, 'занято'), (2, 'свободно'), (3, 'выбрано'), (4, 'недоступно');
 
 --    тест
 
