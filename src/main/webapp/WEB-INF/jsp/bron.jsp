@@ -131,23 +131,26 @@ if (st===4){
 
 function getDisabled(st){
 
+if (st===0){
+  return true;  //неопределен
+}
 if (st===1){
-  return false  //занято
+  return true;  //занято
 }
 
 if (st===2){
-
-  return true  //свободно
+ //alert(st);
+  return false;  //свободно
 }
 
 if (st===3){
 
-  return false  //выбрано
+  return true;  //выбрано
 }
 
 if (st===4){
 
-   return false  //недоступно
+   return true;  //недоступно
 }
 }
 

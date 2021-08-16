@@ -242,8 +242,8 @@ public class WorkplaceService {
         Date convertedCurrentDateStart = null;
         Date convertedCurrentDateStop = null;
         try {
-            convertedCurrentDateStart = simpleDateFormat.parse(start);
-            convertedCurrentDateStop = simpleDateFormat.parse(stop);
+            convertedCurrentDateStart = simpleDateFormat.parse(start.replaceAll("T","-"));
+            convertedCurrentDateStop = simpleDateFormat.parse(stop.replaceAll("T","-"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
