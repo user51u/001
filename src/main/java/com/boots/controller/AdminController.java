@@ -22,12 +22,26 @@ public class AdminController {
 
     @GetMapping("/init")
     public String init(Model model) {
+        System.out.println("adminRepository-init---005");
+        try {
+            adminRepository.createUserRole();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         try {
             adminRepository.createStatus();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+        try {
+            userService.createAdmin();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         model.addAttribute("allUsers", userService.allUsers());
         return "redirect:/";

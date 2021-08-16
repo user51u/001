@@ -6,6 +6,7 @@ import com.boots.entity.Workplace;
 import com.boots.repository.RoleRepository;
 import com.boots.repository.UserRepository;
 import com.boots.repository.WorkplaceRepository;
+import javassist.expr.NewArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -51,8 +52,6 @@ public class UserService implements UserDetailsService {
     }
 
 
-
-
     public boolean saveUser(User user) {
         User userFromDB = userRepository.findByUsername(user.getUsername());
 
@@ -66,6 +65,17 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
+    public boolean createAdmin() {
+        System.out.println("createAdmin---005");
+        User user = new User();
+        user.setUsername("admin");
+        user.setRoles(Collections.singleton(new Role(2L, "ROLE_ADMIN")));
+        user.setPassword(bCryptPasswordEncoder.encode("admin"));
+        System.out.println("createAdmin---010 "+user);
+        userRepository.save(user);
+        System.out.println("createAdmin---015 "+user);
+        return true;
+    }
 
 
     public boolean deleteUser(Long userId) {

@@ -195,7 +195,8 @@ public class WorkplaceController {
 
             //    model.addAttribute("userForm", new WorkplaceBron());
 
-            checkWorkplaceList = workplaceRepository.getWorkplaceBusy(start, stop);
+           // checkWorkplaceList = workplaceRepository.getWorkplaceBusy(start+"", stop+"");
+            checkWorkplaceList = workplaceRepository.getWorkplaceBusy("2021-08-10 09:15:00", "2021-08-10 15:45:00");
             System.out.println("bronWorkplace1---052 workplaceList.size()=" + checkWorkplaceList.size());
 
             for (int i = 0; i < checkWorkplaceList.size(); i++) {
