@@ -102,20 +102,21 @@ public class WorkplaceController {
 
 
     @GetMapping("/bron")
-    public String bronList(Model model) {
-        System.out.println("workplaceList---001 ");
 
-//        List<Integer> workplaceList =workplaceRepository.getWorkplaceBusy(start,stop);
-//        System.out.println("bronWorkplace1---052 workplaceList.size()=" +workplaceList.size());
-//
+ //   public ResponseEntity<List<Film>> getAllTutorials(@RequestParam(required = false) String title) {
+
+    public String bronList(Model model,
+                           @RequestParam(required = false, defaultValue = "1") String start,
+                           @RequestParam(required = false, defaultValue = "2") String stop,
+                           @RequestParam(required = false, defaultValue = "3") String startTime,
+                           @RequestParam(required = false, defaultValue = "4") String stoptTime
+    ) {
+        System.out.println("bronList---001 "+start + " "+ stop + " "+startTime +" "+stoptTime);
 
         List<Workplace> workplaceList = workplaceService.allWorkplace();
-
-
         for (int i1 = 0; i1 < checkWorkplaceList.size(); i1++) {
             System.out.println("bronWorkplace1---005 checkWorkplaceList.get(i1)=" +checkWorkplaceList.get(i1));
         }
-
 
         for (int i = 0; i < workplaceList.size(); i++) {
             System.out.println("bronWorkplace1---010 workplaceList.get(i)=" + workplaceList.get(i));
@@ -130,11 +131,12 @@ public class WorkplaceController {
 
                  }
              }
-
-
-
         }
         model.addAttribute("allWorkplace",workplaceList );
+        model.addAttribute("start",start );
+        model.addAttribute("stop",stop );
+        model.addAttribute("startTime",startTime);
+        model.addAttribute("stopTime",stoptTime);
         return "bron";
     }
 
@@ -187,7 +189,7 @@ public class WorkplaceController {
         }
 
 
-        if (action.equals("bron5555")) {
+        if (action.equals("bronCheckDate")) {
             System.out.println("bronWorkplace1---050 action=" + action);
 
             //    model.addAttribute("userForm", new WorkplaceBron());
@@ -203,7 +205,7 @@ public class WorkplaceController {
 //            model.addAttribute("allWorkplaceBron", workplaceBronList);
 //
 //            workplaceService.checkWorkplaceBron(workplaceId, start, stop, 4l);
-            return "redirect:/bron";
+            return "redirect:/bron?start="+start+"&stop="+stop;
         }
 
 

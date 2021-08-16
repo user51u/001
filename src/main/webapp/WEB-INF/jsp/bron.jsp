@@ -8,7 +8,7 @@
     <title>Бронирование рабочего места</title>
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css">
 </head>
-
+<label id="text">text </label>
 
 <form action="${pageContext.request.contextPath}/bron" method="post">
     <label for="start">Дата начала брони:</label>
@@ -24,8 +24,6 @@
     <label for="stop">Дата конца брони: </label>
 
     <input type="date" required=true id="stop" name="trip-start"
-
-
            min="2021-06-01">
 
 
@@ -33,10 +31,12 @@
 
     <input type="time" required=true id="stopTime"> <br><br>
     <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-    <input type="hidden" name="action" value="bron5555"/>
+    <input type="hidden" name="action" value="bronCheckDate"/>
     <input type="hidden" id="startTmp" name="start" value="1234567890"/>
     <input type="hidden" id="stopTmp" name="stop" value="1234567890"/>
-    <button onclick="My_Date()" type="submit">Проверить</button>
+
+
+    <button onclick="checkDate()" type="submit">Проверить</button>
 </form>
 
 
@@ -45,7 +45,7 @@
 
 <script>
 
-        function My_Date2() {
+        function runOnLoad() {
         var a = new Date();
         var year = a.toLocaleString().substring(6, 10);
         var month = a.toLocaleString().substring(3, 5);
@@ -53,13 +53,26 @@
         var a1 = year + "-"+ month +"-"+ day;
         document.getElementById('start').value= a1;
         document.getElementById('start').min= a1;
+
+        //document.getElementById("text").innerHTML ="Page location is " + window.location.href;
+        var url = new URL(window.location.href);
+       var start1=url.searchParams.get("start");
+    //    document.getElementById("text").innerHTML=url.searchParams.get("start");
+        var dateTime1 = start1.split('T');
+        document.getElementById("text").innerHTML=dateTime1;
+        document.getElementById('start').value= dateTime1[0];
+        document.getElementById('startTime').value= dateTime1[1];
+
+        var stop1=url.searchParams.get("stop");
+        var dateTime2 = stop1.split('T');
+        document.getElementById('stop').value= dateTime2[0];
+        document.getElementById('stopTime').value= dateTime2[1];
+
         }
 
 
 
-  function My_Date() {
-
-        var birthday = new Date('1995-12-17T03:24:00');
+  function checkDate() {
         var x=document.getElementById('start').value+ "T" +document.getElementById('startTime').value ;
            var y=document.getElementById('stop').value+ "T" +document.getElementById('stopTime').value ;
         var x1 = new Date(x);
@@ -67,17 +80,14 @@
         var dt = y1 - x1;
         var g =    document.getElementById("start").value;
         document.getElementById('test').innerHTML= g;
-
-
-
         if(dt<0){
          alert( "Дата/время конца брони должно быть позже начала брони" );
 }
 else
 {
 
-             document.getElementById('startTmp').value=document.getElementById('start').value+ "-" +document.getElementById('startTime').value ;
-          document.getElementById('stopTmp').value=document.getElementById('stop').value+ "-" +document.getElementById('stopTime').value ;
+          document.getElementById('startTmp').value=document.getElementById('start').value+ "T" +document.getElementById('startTime').value ;
+          document.getElementById('stopTmp').value=document.getElementById('stop').value+ "T" +document.getElementById('stopTime').value ;
 
 
 }
@@ -158,6 +168,7 @@ function clearit(){
 
 
 
+
 </script>
 
 
@@ -184,6 +195,7 @@ function clearit(){
                 <script>
                 //alert( color1());
                 document.getElementById(${workplace.id}).style.backgroundColor=color1(${workplace.status});
+
 
                 </script>
 
@@ -233,7 +245,9 @@ function clearit(){
                         <input type="hidden" id="startTmp${workplace.id}" name="start" value="1234567890"/>
                         <input type="hidden" id="stopTmp${workplace.id}" name="stop" value="1234567890"/>
                         <input type="hidden" name="action" value="bron6"/>
-                        <button id="br1${workplace.id}" onclick="My_Date1(${workplace.id})" type="submit">Забронировать</button>
+                        <button id="br1${workplace.id}" onclick="setDate(${workplace.id})" type="submit">
+                            Забронировать
+                        </button>
                     </form>
 
                 </td>
@@ -245,6 +259,7 @@ function clearit(){
                   //  document.getElementById("br1${workplace.id}").textContent = 'Show filter1';
                     document.getElementById("br1${workplace.id}").disabled =getDisabled(${workplace.status});
 
+
                 </script>
 
             </tr>
@@ -254,27 +269,16 @@ function clearit(){
 </div>
 
 <script>
-
-
-
-
-         function My_Date1(id) {
-
-          document.getElementById('startTmp'+id).value=document.getElementById('start').value+ "-" +document.getElementById('startTime').value ;
-          document.getElementById('stopTmp'+id).value=document.getElementById('stop').value+ "-" +document.getElementById('stopTime').value ;
+         function setDate(id) {
+          document.getElementById('startTmp'+id).value=document.getElementById('start').value+ "T" +document.getElementById('startTime').value ;
+          document.getElementById('stopTmp'+id).value=document.getElementById('stop').value+ "T" +document.getElementById('stopTime').value ;
           alert( document.getElementById('startTmp'+id).value +" "+ document.getElementById('stopTmp'+id).value );
         }
 
-
-
-
-
-
-
-
 </script>
 
-<body onload="My_Date2();">
+<body
+        onload="runOnLoad();">
 </body>
 
 
