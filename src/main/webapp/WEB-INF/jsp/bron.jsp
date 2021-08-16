@@ -10,21 +10,20 @@
 </head>
 
 
-
 <form action="${pageContext.request.contextPath}/bron" method="post">
     <label for="start">Дата начала брони:</label>
-    <input type="date" required = true id="start" name="trip-start"
+    <input type="date" required=true id="start" name="trip-start"
            value="2018-07-22"
            min="2021-06-01">
 
     <label for="appt">Время начала брони:</label>
 
-    <input type="time" required = true id="startTime"> <br><br>
+    <input type="time" required=true id="startTime"> <br><br>
 
 
     <label for="stop">Дата конца брони: </label>
 
-    <input type="date" required = true id="stop" name="trip-start"
+    <input type="date" required=true id="stop" name="trip-start"
 
 
            min="2021-06-01">
@@ -32,14 +31,13 @@
 
     <label for="stopTime">Время конца брони:</label>
 
-    <input type="time" required = true id="stopTime"> <br><br>
+    <input type="time" required=true id="stopTime"> <br><br>
     <input type="hidden" name="workplaceId" value="${workplace.id}"/>
     <input type="hidden" name="action" value="bron5555"/>
     <input type="hidden" id="startTmp" name="start" value="1234567890"/>
     <input type="hidden" id="stopTmp" name="stop" value="1234567890"/>
-    <button  onclick="My_Date()" type="submit">Проверить</button>
+    <button onclick="My_Date()" type="submit">Проверить</button>
 </form>
-
 
 
 <p id="test"></p>
@@ -55,11 +53,10 @@
         var a1 = year + "-"+ month +"-"+ day;
         document.getElementById('start').value= a1;
         document.getElementById('start').min= a1;
-
-
-
-
         }
+
+
+
   function My_Date() {
 
         var birthday = new Date('1995-12-17T03:24:00');
@@ -95,6 +92,9 @@ function color(){
      x[i].style.backgroundColor ="blue";
    }
 }
+
+
+
 function color1(st){
 
 if (st===1){
@@ -116,18 +116,40 @@ if (st===4){
 
   return "#00FFFF"
 }
-
-
-
-
-
 }
+
+
+function getDisabled(st){
+
+if (st===1){
+  return false  //занято
+}
+
+if (st===2){
+
+  return true  //свободно
+}
+
+if (st===3){
+
+  return false  //выбрано
+}
+
+if (st===4){
+
+   return false  //недоступно
+}
+}
+
+
+
 function clearit(){
    var x = document.getElementsByTagName('td');
    for(i=0;i<x.length;i++) {
      x[i].style.backgroundColor = "";
    }
 }
+
 
 
 
@@ -157,15 +179,14 @@ function clearit(){
                 <td>${workplace.status}</td>
 
 
-
                 <td id="${workplace.id}">${workplace.status}</td>
 
                 <script>
                 //alert( color1());
                 document.getElementById(${workplace.id}).style.backgroundColor=color1(${workplace.status});
 
-
                 </script>
+
                 <td>
                     <c:forEach items="${workplace.workplaceStatuses}" var="statusWorkplace">${statusWorkplace.name}
                     </c:forEach>
@@ -212,11 +233,19 @@ function clearit(){
                         <input type="hidden" id="startTmp${workplace.id}" name="start" value="1234567890"/>
                         <input type="hidden" id="stopTmp${workplace.id}" name="stop" value="1234567890"/>
                         <input type="hidden" name="action" value="bron6"/>
-                        <button id="br1" onclick="My_Date1(${workplace.id})" type="submit">Забронировать</button>
+                        <button id="br1${workplace.id}" onclick="My_Date1(${workplace.id})" type="submit">Забронировать</button>
                     </form>
 
-
                 </td>
+
+
+                <script>
+                 //   alert( "color1()");
+                    var t = document.createTextNode("test content");
+                  //  document.getElementById("br1${workplace.id}").textContent = 'Show filter1';
+                    document.getElementById("br1${workplace.id}").disabled =getDisabled(${workplace.status});
+
+                </script>
 
             </tr>
         </c:forEach>
@@ -235,6 +264,7 @@ function clearit(){
           document.getElementById('stopTmp'+id).value=document.getElementById('stop').value+ "-" +document.getElementById('stopTime').value ;
           alert( document.getElementById('startTmp'+id).value +" "+ document.getElementById('stopTmp'+id).value );
         }
+
 
 
 
