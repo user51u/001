@@ -26,6 +26,12 @@ public interface WorkplaceRepository extends JpaRepository<Workplace, Long> {
 //            "date_stop > :start and date_stop < :stop", nativeQuery = true)
 //    List<Integer> getWorkplaceBusy(@Param("start") String start , @Param("stop") String stop);
 //
-    @Query(value = "SELECT number FROM public.t_workplace_bron where date_start2 > '2021-08-10 09:15:00' and date_start2 < '2021-08-10 15:45:00'  or date_stop > '2021-08-10 09:15:00' and date_stop < '2021-08-10 15:45:00'", nativeQuery = true)
+//    @Query(value = "SELECT number FROM public.t_workplace_bron where date_start2 > '2021-08-10 09:15:00' and date_start2 < '2021-08-10 15:45:00' or date_stop > '2021-08-10 09:15:00' and date_stop < '2021-08-10 15:45:00'", nativeQuery = true)
+//    List<Integer> getWorkplaceBusy(String start, String stop);
+
+
+    @Query(value = "SELECT number FROM public.t_workplace_bron where date_start2 > '2021-08-10 09:15:00' and date_start2 < '2021-08-10 15:45:00' or date_stop > '2021-08-10 09:15:00' and date_stop < '2021-08-10 15:45:00'", nativeQuery = true)
     List<Integer> getWorkplaceBusy(String start, String stop);
 }
+
+//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
