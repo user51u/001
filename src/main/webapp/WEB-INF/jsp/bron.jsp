@@ -59,7 +59,7 @@
        var param=url.searchParams.get("param");
       // alert(param);
     //    document.getElementById("text").innerHTML=url.searchParams.get("start");
-     // alert(start1);
+      alert(start1);
 
         if(start1!=null)
 {
@@ -68,20 +68,21 @@
         //document.getElementById("text").innerHTML=dateTime1;
         document.getElementById('start').value= dateTime1[0];
         document.getElementById('startTime').value= dateTime1[1];
- //alert("2");
+    alert("2");
         var stop1=url.searchParams.get("stop");
         var dateTime2 = stop1.split('T');
         document.getElementById('stop').value= dateTime2[0];
         document.getElementById('stopTime').value= dateTime2[1];
  }
-    //  alert("1");
+        alert(param);
 
-        if (param==="runOnLoad")
+        if (param==="runOnLoad"||param===null)
         {
 
         }
         else
         {
+        alert("3");
         document.getElementById('param').value= "runOnLoad";
         document.getElementById("buttonCheck").click();
         }
@@ -125,32 +126,39 @@ function color(){
 
 function color1(st){
 
+if (st===0){
+
+  return "#FFFFFF";
+}
+
 if (st===1){
 
-  return "#FF0000"
+  return "#FF0000";
 }
 
 if (st===2){
 
-  return "#00FF00"
+  return "#00FF00";
 }
 
 if (st===3){
 
-  return "#0000FF"
+  return "#0000FF";
 }
 
 if (st===4){
 
-  return "#00FFFF"
+  return "#00FFFF";
 }
+ return "#FFFFFF";
+
 }
 
 
 
 
 function getStatus(st){
-
+alert ("status "+st)
 if (st===0){
   return "неопределен";  //неопределен
 }
@@ -171,6 +179,9 @@ if (st===3){
 if (st===4){
    return "недоступно";  //недоступно
 }
+
+
+ return "неопределен";
 }
 
 
@@ -251,7 +262,7 @@ function clearit(){
                 <td id="status${workplace.id}">${workplace.status}</td>
 
                 <script>
-                //alert( color1());
+                alert("color "+ color1());
                 document.getElementById("status${workplace.id}").style.backgroundColor=color1(${workplace.status});
                 document.getElementById("status${workplace.id}").textContent=getStatus(${workplace.status});
                 </script>
