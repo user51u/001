@@ -57,18 +57,25 @@
         var url = new URL(window.location.href);
        var start1=url.searchParams.get("start");
        var param=url.searchParams.get("param");
+      // alert(param);
     //    document.getElementById("text").innerHTML=url.searchParams.get("start");
-        var dateTime1 = start1.split('T');
+     // alert(start1);
+
+        if(start1!=null)
+{
+         var dateTime1 = start1.split('T');
+       //  alert(dateTime1);
         //document.getElementById("text").innerHTML=dateTime1;
         document.getElementById('start').value= dateTime1[0];
         document.getElementById('startTime').value= dateTime1[1];
-
+ //alert("2");
         var stop1=url.searchParams.get("stop");
         var dateTime2 = stop1.split('T');
         document.getElementById('stop').value= dateTime2[0];
         document.getElementById('stopTime').value= dateTime2[1];
+ }
+    //  alert("1");
 
-       // alert(param);
         if (param==="runOnLoad")
         {
 
