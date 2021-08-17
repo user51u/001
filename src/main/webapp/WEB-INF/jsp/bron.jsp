@@ -35,7 +35,7 @@
     <input type="hidden" id="startTmp" name="start" value="1234567890"/>
     <input type="hidden" id="stopTmp" name="stop" value="1234567890"/>
     <input type="hidden" id="param" name="param" value="1234567890"/>
-    <button  id="buttonCheck" onclick="checkDate()" type="submit">Проверить</button>
+    <button id="buttonCheck" onclick="checkDate()" type="submit">Проверить</button>
 </form>
 
 
@@ -140,6 +140,33 @@ if (st===4){
 }
 
 
+
+
+function getStatus(st){
+
+if (st===0){
+  return "неопределен";  //неопределен
+}
+if (st===1){
+  return "занято";  //занято
+}
+
+if (st===2){
+ //alert(st);
+  return "свободно";  //свободно
+}
+
+if (st===3){
+
+  return "выбрано";  //выбрано
+}
+
+if (st===4){
+   return "недоступно";  //недоступно
+}
+}
+
+
 function getDisabled(st){
 
 if (st===0){
@@ -183,6 +210,7 @@ function clearit(){
 
 
 
+
 </script>
 
 
@@ -192,7 +220,7 @@ function clearit(){
         <th>ID</th>
         <th>№ рабочего места</th>
         <th>Описание</th>
-        <th>Статус</th>
+
 
         <th>Статус</th>
         </thead>
@@ -201,51 +229,59 @@ function clearit(){
                 <td>${workplace.id}</td>
                 <td>${workplace.number}</td>
                 <td>${workplace.detail}</td>
-                <td>${workplace.status}</td>
+            <!--    <td>${workplace.status}</td>
 
 
-                <td id="${workplace.id}">${workplace.status}</td>
+                <td id="${workplace.id}">${workplace.status}</td>-->
 
                 <script>
                 //alert( color1());
                 document.getElementById(${workplace.id}).style.backgroundColor=color1(${workplace.status});
 
-
                 </script>
 
-                <td>
-                    <c:forEach items="${workplace.workplaceStatuses}" var="statusWorkplace">${statusWorkplace.name}
-                    </c:forEach>
-                </td>
 
-                <td>
-                    <form action="${pageContext.request.contextPath}/bron" method="post">
-                        <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-                        <input type="hidden" name="action" value="bron1"/>
-                        <button type="submit">Занято</button>
-                    </form>
+                <td id="status${workplace.id}">${workplace.status}</td>
 
+                <script>
+                //alert( color1());
+                document.getElementById("status${workplace.id}").style.backgroundColor=color1(${workplace.status});
+                document.getElementById("status${workplace.id}").textContent=getStatus(${workplace.status});
+                </script>
 
-                    <form action="${pageContext.request.contextPath}/bron" method="post">
-                        <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-                        <input type="hidden" name="action" value="bron2"/>
-                        <button type="submit">Свободно</button>
-                    </form>
+                <!--   <td>
+                       <c:forEach items="${workplace.workplaceStatuses}" var="statusWorkplace">${statusWorkplace.name}
+                       </c:forEach>
+                   </td>-->
 
-
-                    <form action="${pageContext.request.contextPath}/bron" method="post">
-                        <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-                        <input type="hidden" name="action" value="bron3"/>
-                        <button type="submit">Выбрано</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/bron" method="post">
-                        <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-                        <input type="hidden" name="action" value="bron4"/>
-                        <button type="submit">Недоступно</button>
-                    </form>
+                <!--  <td>
+                      <form action="${pageContext.request.contextPath}/bron" method="post">
+                          <input type="hidden" name="workplaceId" value="${workplace.id}"/>
+                          <input type="hidden" name="action" value="bron1"/>
+                          <button type="submit">Занято</button>
+                      </form>
 
 
-                </td>
+                      <form action="${pageContext.request.contextPath}/bron" method="post">
+                          <input type="hidden" name="workplaceId" value="${workplace.id}"/>
+                          <input type="hidden" name="action" value="bron2"/>
+                          <button type="submit">Свободно</button>
+                      </form>
+
+
+                      <form action="${pageContext.request.contextPath}/bron" method="post">
+                          <input type="hidden" name="workplaceId" value="${workplace.id}"/>
+                          <input type="hidden" name="action" value="bron3"/>
+                          <button type="submit">Выбрано</button>
+                      </form>
+                      <form action="${pageContext.request.contextPath}/bron" method="post">
+                          <input type="hidden" name="workplaceId" value="${workplace.id}"/>
+                          <input type="hidden" name="action" value="bron4"/>
+                          <button type="submit">Недоступно</button>
+                      </form>
+
+
+                  </td>-->
                 <td>
                     <form action="${pageContext.request.contextPath}/bron" method="post">
                         <input type="hidden" name="workplaceId" value="${workplace.id}"/>
@@ -274,6 +310,7 @@ function clearit(){
                     document.getElementById("br1${workplace.id}").disabled =getDisabled(${workplace.status});
 
 
+
                 </script>
 
             </tr>
@@ -288,6 +325,7 @@ function clearit(){
           document.getElementById('stopTmp'+id).value=document.getElementById('stop').value+ "T" +document.getElementById('stopTime').value ;
        //   alert( document.getElementById('startTmp'+id).value +" "+ document.getElementById('stopTmp'+id).value );
         }
+
 
 </script>
 
