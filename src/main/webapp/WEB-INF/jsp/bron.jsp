@@ -34,9 +34,8 @@
     <input type="hidden" name="action" value="bronCheckDate"/>
     <input type="hidden" id="startTmp" name="start" value="1234567890"/>
     <input type="hidden" id="stopTmp" name="stop" value="1234567890"/>
-
-
-    <button onclick="checkDate()" type="submit">Проверить</button>
+    <input type="hidden" id="param" name="param" value="1234567890"/>
+    <button  id="buttonCheck" onclick="checkDate()" type="submit">Проверить</button>
 </form>
 
 
@@ -57,9 +56,10 @@
         //document.getElementById("text").innerHTML ="Page location is " + window.location.href;
         var url = new URL(window.location.href);
        var start1=url.searchParams.get("start");
+       var param=url.searchParams.get("param");
     //    document.getElementById("text").innerHTML=url.searchParams.get("start");
         var dateTime1 = start1.split('T');
-        document.getElementById("text").innerHTML=dateTime1;
+        //document.getElementById("text").innerHTML=dateTime1;
         document.getElementById('start').value= dateTime1[0];
         document.getElementById('startTime').value= dateTime1[1];
 
@@ -67,6 +67,17 @@
         var dateTime2 = stop1.split('T');
         document.getElementById('stop').value= dateTime2[0];
         document.getElementById('stopTime').value= dateTime2[1];
+
+       // alert(param);
+        if (param==="runOnLoad")
+        {
+
+        }
+        else
+        {
+        document.getElementById('param').value= "runOnLoad";
+        document.getElementById("buttonCheck").click();
+        }
 
         }
 
@@ -275,7 +286,7 @@ function clearit(){
          function setDate(id) {
           document.getElementById('startTmp'+id).value=document.getElementById('start').value+ "T" +document.getElementById('startTime').value ;
           document.getElementById('stopTmp'+id).value=document.getElementById('stop').value+ "T" +document.getElementById('stopTime').value ;
-          alert( document.getElementById('startTmp'+id).value +" "+ document.getElementById('stopTmp'+id).value );
+       //   alert( document.getElementById('startTmp'+id).value +" "+ document.getElementById('stopTmp'+id).value );
         }
 
 </script>

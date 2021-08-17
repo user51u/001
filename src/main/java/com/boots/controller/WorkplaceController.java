@@ -7,18 +7,32 @@ import com.boots.repository.WorkplaceBronRepository;
 import com.boots.repository.WorkplaceRepository;
 import com.boots.service.WorkplaceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.validation.Valid;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @Controller
 public class WorkplaceController {
+
+    @PersistenceUnit
+    private EntityManagerFactory emf; //qqqqqqqqqqqqqqqqqqqqqqqqqq
+
+
     @Autowired
     private WorkplaceService workplaceService;
 
@@ -149,9 +163,10 @@ public class WorkplaceController {
             @RequestParam(required = true, defaultValue = "") String action,
             @RequestParam(required = false, defaultValue = "") String start,
             @RequestParam(required = false, defaultValue = "") String stop,
+            @RequestParam(required = false, defaultValue = "") String param,
             Model model) {
 
-        System.out.println("bronWorkplace1---001 " + start + " " + stop);
+        System.out.println("bronWorkplace1---001 " + start + " " + stop + " param=|"+param+"|");
         System.out.println("bronWorkplace1---005 workplaceId=" + workplaceId);
         System.out.println("bronWorkplace1---010 action=" + action);
 
@@ -186,17 +201,77 @@ public class WorkplaceController {
 
             //    model.addAttribute("userForm", new WorkplaceBron());
             workplaceService.bronWorkplaceBron(workplaceId, start, stop, 4l);
-            return "redirect:/bron";
+            return "redirect:/bron?start=" + start + "&stop=" + stop;
         }
 
 
         if (action.equals("bronCheckDate")) {
-            System.out.println("bronWorkplace1---050 action=" + action);
+            System.out.println("bronCheckDate---050 action=" + action);
 
             //    model.addAttribute("userForm", new WorkplaceBron());
 
-           // checkWorkplaceList = workplaceRepository.getWorkplaceBusy(start+"", stop+"");
-            checkWorkplaceList = workplaceRepository.getWorkplaceBusy("2021-08-10 09:15:00", "2021-08-10 15:45:00");
+            // checkWorkplaceList = workplaceRepository.getWorkplaceBusy(start+"", stop+"");
+
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
+            Date convertedCurrentDateStart = null;
+            Date convertedCurrentDateStop = null;
+            try {
+                convertedCurrentDateStart = simpleDateFormat.parse(start.replaceAll("T","-"));
+                convertedCurrentDateStop = simpleDateFormat.parse(stop.replaceAll("T","-"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            //Date convertedCurrentDate = simpleDateFormat.parse("2013-09-18");
+            //  String date=simpleDateFormat.format(convertedCurrentDate );
+
+
+            Timestamp timestampStart = new Timestamp(convertedCurrentDateStart.getTime());
+            Timestamp timestampStop = new Timestamp(convertedCurrentDateStop.getTime());
+
+
+
+            checkWorkplaceList = workplaceRepository.getWorkplaceBusy(timestampStart, timestampStop);
+
+
+//            try {
+//
+//                EntityManager entityManager = emf.createEntityManager();
+//                String sql = "SELECT number FROM public.t_workplace_bron where date_start2 > '"
+//                        +
+//                        start.replaceAll("T"," ")
+//                        + "' and date_start2 < '" +
+//                        stop.replaceAll("T"," ")
+//                        + "' or date_stop > '" +
+//                        start.replaceAll("T"," ")
+//                        + "' and date_stop < '" +
+//                        stop.replaceAll("T"," ")
+//                        +"'";
+//                System.out.println("bronCheckDate---003: |"+sql+"|");
+//                checkWorkplaceList = entityManager
+//                        .createQuery(sql)
+//                        .getResultList();
+//
+//                System.out.println("bronCheckDate---004: films.size()=" +  checkWorkplaceList);
+
+
+//           List<Film> films = new ArrayList<Film>();
+//            if (title == null)
+//                tutorialRepository.findAll().forEach(films::add);
+//            else
+//                tutorialRepository.findByTitleContaining(title).forEach(films::add);
+//
+//            if (films.isEmpty()) {
+//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//            }
+
+                //  return new ResponseEntity<>(films, HttpStatus.OK);
+//            } catch (Exception e) {
+//                System.out.println("bronCheckDate---020: ERROR "+e);
+//              //   return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//            }
+
+
             System.out.println("bronWorkplace1---052 workplaceList.size()=" + checkWorkplaceList.size());
 
             for (int i = 0; i < checkWorkplaceList.size(); i++) {
@@ -207,7 +282,7 @@ public class WorkplaceController {
 //            model.addAttribute("allWorkplaceBron", workplaceBronList);
 //
 //            workplaceService.checkWorkplaceBron(workplaceId, start, stop, 4l);
-            return "redirect:/bron?start=" + start + "&stop=" + stop;
+            return "redirect:/bron?start=" + start + "&stop=" + stop+ "&param="+param;
         }
 
 
