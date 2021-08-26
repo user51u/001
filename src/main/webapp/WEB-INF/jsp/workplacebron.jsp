@@ -16,11 +16,10 @@
   <table>
     <thead>
     <th>ID</th>
-    <th>Номер</th>
-    <th>Пользователь</th>
-    <th>Описение</th>
+    <th>ID workplace</th>
+    <th>ID Пользователь</th>
+    <th>Описание Workplace</th>
     <th>Старт</th>
-
     <th>Стоп</th>
     </thead>
     <c:forEach items="${allWorkplaceBron}" var="workplacebron">

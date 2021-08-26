@@ -1,4 +1,4 @@
-1.101
+1.102
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -62,7 +62,7 @@
        var param=url.searchParams.get("param");
       // alert(param);
     //    document.getElementById("text").innerHTML=url.searchParams.get("start");
-      alert(start1);
+   //   alert(start1);
 
         if(start1!=null)
 {
@@ -71,13 +71,13 @@
         //document.getElementById("text").innerHTML=dateTime1;
         document.getElementById('start').value= dateTime1[0];
         document.getElementById('startTime').value= dateTime1[1];
-    alert("2");
+//    alert("2");
         var stop1=url.searchParams.get("stop");
         var dateTime2 = stop1.split('T');
         document.getElementById('stop').value= dateTime2[0];
         document.getElementById('stopTime').value= dateTime2[1];
  }
-        alert(param);
+       // alert(param);
 
         if (param==="runOnLoad"||param===null)
         {
@@ -85,10 +85,18 @@
         }
         else
         {
-        alert("3");
+    //    alert("3");
         document.getElementById('param').value= "runOnLoad";
         document.getElementById("buttonCheck").click();
         }
+
+      if (param==="needCheck")
+        {
+        document.getElementById('param').value= "runOnLoad";
+        document.getElementById("buttonCheck").click();
+        }
+
+
 
         }
 
@@ -96,7 +104,7 @@
 
   function checkDate() {
         var x=document.getElementById('start').value+ "T" +document.getElementById('startTime').value ;
-           var y=document.getElementById('stop').value+ "T" +document.getElementById('stopTime').value ;
+        var y=document.getElementById('stop').value+ "T" +document.getElementById('stopTime').value ;
         var x1 = new Date(x);
         var y1 = new Date(y);
         var dt = y1 - x1;
@@ -161,7 +169,7 @@ if (st===4){
 
 
 function getStatus(st){
-alert ("status "+st)
+//alert ("status "+st)
 if (st===0){
   return "неопределен";  //неопределен
 }
@@ -265,44 +273,12 @@ function clearit(){
                 <td id="status${workplace.id}">${workplace.status}</td>
 
                 <script>
-                alert("color "+ color1());
+              //  alert("color "+ color1());
                 document.getElementById("status${workplace.id}").style.backgroundColor=color1(${workplace.status});
                 document.getElementById("status${workplace.id}").textContent=getStatus(${workplace.status});
                 </script>
 
-                <!--   <td>
-                       <c:forEach items="${workplace.workplaceStatuses}" var="statusWorkplace">${statusWorkplace.name}
-                       </c:forEach>
-                   </td>-->
 
-                <!--  <td>
-                      <form action="${pageContext.request.contextPath}/bron" method="post">
-                          <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-                          <input type="hidden" name="action" value="bron1"/>
-                          <button type="submit">Занято</button>
-                      </form>
-
-
-                      <form action="${pageContext.request.contextPath}/bron" method="post">
-                          <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-                          <input type="hidden" name="action" value="bron2"/>
-                          <button type="submit">Свободно</button>
-                      </form>
-
-
-                      <form action="${pageContext.request.contextPath}/bron" method="post">
-                          <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-                          <input type="hidden" name="action" value="bron3"/>
-                          <button type="submit">Выбрано</button>
-                      </form>
-                      <form action="${pageContext.request.contextPath}/bron" method="post">
-                          <input type="hidden" name="workplaceId" value="${workplace.id}"/>
-                          <input type="hidden" name="action" value="bron4"/>
-                          <button type="submit">Недоступно</button>
-                      </form>
-
-
-                  </td>-->
                 <td>
                     <form action="${pageContext.request.contextPath}/bron" method="post">
                         <input type="hidden" name="workplaceId" value="${workplace.id}"/>

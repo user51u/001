@@ -163,7 +163,7 @@ public class WorkplaceService {
             System.out.println("bronWorkplace---010 найден " + id + " " + workplaceRepositoryById.get());
             System.out.println("bronWorkplace---015 найден " + workplaceStatuses);
             workplaceStatuses.clear();
-            workplaceStatuses.add(new WorkplaceStatus(status, "ROLE_USER"));
+            workplaceStatuses.add(new WorkplaceStatus(status, ""));
 
             //   workplaceRepositoryById.get().setWorkplaceStatuses(Collections.singleton(new WorkplaceStatus()));
 //            System.out.println("bronWorkplace---015 найден " + id + " " + workplaceRepositoryById);

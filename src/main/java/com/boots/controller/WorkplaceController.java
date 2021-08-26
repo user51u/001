@@ -45,7 +45,7 @@ public class WorkplaceController {
 
     @GetMapping("/workplace")
     public String workplaceList(Model model) {
-        System.out.println("workplaceList---001 ");
+       System.out.println("workplaceList---001 ");
         model.addAttribute("allWorkplace", workplaceService.allWorkplace());
         return "workplace";
     }
@@ -192,7 +192,7 @@ public class WorkplaceController {
         }
         if (action.equals("bron5")) {
             System.out.println("bronWorkplace1---010 action=" + action);
-            workplaceService.bronWorkplace(workplaceId, 4l);
+        //qqqqq    workplaceService.bronWorkplace(workplaceId, 4l);
             return "redirect:/workplacebron?workplaceId=" + workplaceId;
         }
 
@@ -201,7 +201,7 @@ public class WorkplaceController {
 
             //    model.addAttribute("userForm", new WorkplaceBron());
             workplaceService.bronWorkplaceBron(workplaceId, start, stop, 4l);
-            return "redirect:/bron?start=" + start + "&stop=" + stop;
+            return "redirect:/bron?start=" + start + "&stop=" + stop+"&param=needCheck";
         }
 
 
