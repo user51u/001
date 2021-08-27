@@ -17,8 +17,8 @@
     <thead>
     <th>ID</th>
     <th>ID workplace</th>
-    <th>ID Пользователь</th>
-    <th>Описание Workplace</th>
+    <th>Номер workplace</th>
+    <th>Логин пользователя</th>
     <th>Старт</th>
     <th>Стоп</th>
     </thead>
@@ -26,8 +26,8 @@
       <tr>
         <td>${workplacebron.id}</td>
         <td>${workplacebron.number}</td>
-        <td>${workplacebron.id_user}</td>
-        <td>${workplacebron.detail}</td>
+        <td>${workplacebron.numberWorkplace}</td>
+        <td>${workplacebron.loginUser}</td>
         <td>${workplacebron.date_start2}</td>
         <td>${workplacebron.date_stop}</td>
         <td>

@@ -1,5 +1,6 @@
 package com.boots.controller;
 //qqqqq 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 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
+
 import com.boots.entity.Workplace;
 import com.boots.entity.WorkplaceBron;
 import com.boots.entity.WorkplaceStatus;
@@ -45,7 +46,7 @@ public class WorkplaceController {
 
     @GetMapping("/workplace")
     public String workplaceList(Model model) {
-       System.out.println("workplaceList---001 ");
+        System.out.println("workplaceList---001 ");
         model.addAttribute("allWorkplace", workplaceService.allWorkplace());
         return "workplace";
     }
@@ -159,15 +160,16 @@ public class WorkplaceController {
     public String bronWorkplace1(
 
             @RequestParam(required = true, defaultValue = "") Long workplaceId,
-
+            @RequestParam(required = true, defaultValue = "") Long number,
             @RequestParam(required = true, defaultValue = "") String action,
             @RequestParam(required = false, defaultValue = "") String start,
             @RequestParam(required = false, defaultValue = "") String stop,
             @RequestParam(required = false, defaultValue = "") String param,
+            @RequestParam(required = false, defaultValue = "") String login,
             Model model) {
 
-        System.out.println("bronWorkplace1---001 " + start + " " + stop + " param=|"+param+"|");
-        System.out.println("bronWorkplace1---005 workplaceId=" + workplaceId);
+        System.out.println("bronWorkplace1---001 number=|" + number + "| workplaceId=|" + workplaceId+"|");
+        System.out.println("bronWorkplace1---005 " + start + " " + stop + " param=|" + param + "|");
         System.out.println("bronWorkplace1---010 action=" + action);
 
         if (action.equals("bron1")) {
@@ -192,7 +194,7 @@ public class WorkplaceController {
         }
         if (action.equals("bron5")) {
             System.out.println("bronWorkplace1---010 action=" + action);
-        //qqqqq    workplaceService.bronWorkplace(workplaceId, 4l);
+            //qqqqq    workplaceService.bronWorkplace(workplaceId, 4l);
             return "redirect:/workplacebron?workplaceId=" + workplaceId;
         }
 
@@ -200,8 +202,8 @@ public class WorkplaceController {
             System.out.println("bronWorkplace1---030 action=" + action);
 
             //    model.addAttribute("userForm", new WorkplaceBron());
-            workplaceService.bronWorkplaceBron(workplaceId, start, stop, 4l);
-            return "redirect:/bron?start=" + start + "&stop=" + stop+"&param=needCheck";
+            workplaceService.bronWorkplaceBron(workplaceId, start, stop, 4l, login, number);
+            return "redirect:/bron?start=" + start + "&stop=" + stop + "&param=needCheck";
         }
 
 
@@ -217,8 +219,8 @@ public class WorkplaceController {
             Date convertedCurrentDateStart = null;
             Date convertedCurrentDateStop = null;
             try {
-                convertedCurrentDateStart = simpleDateFormat.parse(start.replaceAll("T","-"));
-                convertedCurrentDateStop = simpleDateFormat.parse(stop.replaceAll("T","-"));
+                convertedCurrentDateStart = simpleDateFormat.parse(start.replaceAll("T", "-"));
+                convertedCurrentDateStop = simpleDateFormat.parse(stop.replaceAll("T", "-"));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -228,7 +230,6 @@ public class WorkplaceController {
 
             Timestamp timestampStart = new Timestamp(convertedCurrentDateStart.getTime());
             Timestamp timestampStop = new Timestamp(convertedCurrentDateStop.getTime());
-
 
 
             checkWorkplaceList = workplaceRepository.getWorkplaceBusy(timestampStart, timestampStop);
@@ -265,7 +266,7 @@ public class WorkplaceController {
 //                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 //            }
 
-                //  return new ResponseEntity<>(films, HttpStatus.OK);
+            //  return new ResponseEntity<>(films, HttpStatus.OK);
 //            } catch (Exception e) {
 //                System.out.println("bronCheckDate---020: ERROR "+e);
 //              //   return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -282,7 +283,7 @@ public class WorkplaceController {
 //            model.addAttribute("allWorkplaceBron", workplaceBronList);
 //
 //            workplaceService.checkWorkplaceBron(workplaceId, start, stop, 4l);
-            return "redirect:/bron?start=" + start + "&stop=" + stop+ "&param="+param;
+            return "redirect:/bron?start=" + start + "&stop=" + stop + "&param=" + param;
         }
 
 

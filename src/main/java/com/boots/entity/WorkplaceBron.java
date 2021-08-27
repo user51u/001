@@ -11,11 +11,34 @@ public class WorkplaceBron {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long number;
+    private Long number; //qqqqqqqq на самом деле id
     private Long id_user;
     private String detail;
+    private Long numberWorkplace;
+    private String loginUser;
+
+
+
+
+
     private Timestamp date_start2=null;
     private Timestamp date_stop=null;
+
+    public Long getNumberWorkplace() {
+        return numberWorkplace;
+    }
+
+    public void setNumberWorkplace(Long numberWorkplace) {
+        this.numberWorkplace = numberWorkplace;
+    }
+
+    public String getLoginUser() {
+        return loginUser;
+    }
+
+    public void setLoginUser(String loginUser) {
+        this.loginUser = loginUser;
+    }
 
     public Long getId() {
         return id;

@@ -232,11 +232,13 @@ public class WorkplaceService {
         //  }
         //  return false;
     }
-   public boolean bronWorkplaceBron(Long id, String start, String stop, Long status) {
-        System.out.println("bronWorkplaceBron---001 id=" + id);
+    public boolean bronWorkplaceBron(Long workplaceId, String start, String stop, Long status, String login, Long numberWorkplace) {
+        System.out.println("bronWorkplaceBron---001 workplaceId=" + workplaceId);
         WorkplaceBron workplaceBron = new WorkplaceBron();
-        workplaceBron.setNumber(id);
-       // workplaceBron.setDate_start2(new java.sql.Date(new Date().getTime()));
+        workplaceBron.setNumber(workplaceId);
+        workplaceBron.setNumberWorkplace(numberWorkplace);
+        workplaceBron.setLoginUser(login);
+        // workplaceBron.setDate_start2(new java.sql.Date(new Date().getTime()));
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
         Date convertedCurrentDateStart = null;
