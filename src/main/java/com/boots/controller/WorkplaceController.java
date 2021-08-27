@@ -141,13 +141,15 @@ public class WorkplaceController {
                 workplaceList.get(i).setStatus(2L); //статус свободен
             }
 
+            if (start.length() != 0 && stop.length() != 0) {
 
-            for (int i1 = 0; i1 < checkWorkplaceList.size(); i1++) {
-                System.out.println("bronWorkplace1---015|" + workplaceList.get(i).getNumber() + "|" + checkWorkplaceList.get(i1).longValue() + "|");
-                if (workplaceList.get(i).getId() == checkWorkplaceList.get(i1).longValue()) {
-                    workplaceList.get(i).setStatus(1l);
-                    System.out.println("bronWorkplace1---020|" + workplaceList.get(i).getNumber() + "|" + checkWorkplaceList.get(i1).longValue() + "|");
+                for (int i1 = 0; i1 < checkWorkplaceList.size(); i1++) {
+                    System.out.println("bronWorkplace1---015|" + workplaceList.get(i).getNumber() + "|" + checkWorkplaceList.get(i1).longValue() + "|");
+                    if (workplaceList.get(i).getId() == checkWorkplaceList.get(i1).longValue()) {
+                        workplaceList.get(i).setStatus(1l);
+                        System.out.println("bronWorkplace1---020|" + workplaceList.get(i).getNumber() + "|" + checkWorkplaceList.get(i1).longValue() + "|");
 
+                    }
                 }
             }
         }
@@ -168,7 +170,7 @@ public class WorkplaceController {
             @RequestParam(required = false, defaultValue = "") String login,
             Model model) {
 
-        System.out.println("bronWorkplace1---001 number=|" + number + "| workplaceId=|" + workplaceId+"|");
+        System.out.println("bronWorkplace1---001 number=|" + number + "| workplaceId=|" + workplaceId + "|");
         System.out.println("bronWorkplace1---005 " + start + " " + stop + " param=|" + param + "|");
         System.out.println("bronWorkplace1---010 action=" + action);
 
@@ -221,18 +223,16 @@ public class WorkplaceController {
             try {
                 convertedCurrentDateStart = simpleDateFormat.parse(start.replaceAll("T", "-"));
                 convertedCurrentDateStop = simpleDateFormat.parse(stop.replaceAll("T", "-"));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            //Date convertedCurrentDate = simpleDateFormat.parse("2013-09-18");
-            //  String date=simpleDateFormat.format(convertedCurrentDate );
+
+                //Date convertedCurrentDate = simpleDateFormat.parse("2013-09-18");
+                //  String date=simpleDateFormat.format(convertedCurrentDate );
 
 
-            Timestamp timestampStart = new Timestamp(convertedCurrentDateStart.getTime());
-            Timestamp timestampStop = new Timestamp(convertedCurrentDateStop.getTime());
+                Timestamp timestampStart = new Timestamp(convertedCurrentDateStart.getTime());
+                Timestamp timestampStop = new Timestamp(convertedCurrentDateStop.getTime());
 
 
-            checkWorkplaceList = workplaceRepository.getWorkplaceBusy(timestampStart, timestampStop);
+                checkWorkplaceList = workplaceRepository.getWorkplaceBusy(timestampStart, timestampStop);
 
 
 //            try {
@@ -266,19 +266,21 @@ public class WorkplaceController {
 //                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 //            }
 
-            //  return new ResponseEntity<>(films, HttpStatus.OK);
+                //  return new ResponseEntity<>(films, HttpStatus.OK);
 //            } catch (Exception e) {
 //                System.out.println("bronCheckDate---020: ERROR "+e);
 //              //   return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 //            }
 
 
-            System.out.println("bronWorkplace1---052 workplaceList.size()=" + checkWorkplaceList.size());
+                System.out.println("bronWorkplace1---052 workplaceList.size()=" + checkWorkplaceList.size());
 
-            for (int i = 0; i < checkWorkplaceList.size(); i++) {
-                System.out.println("bronWorkplace1---055 " + checkWorkplaceList.get(i));
+                for (int i = 0; i < checkWorkplaceList.size(); i++) {
+                    System.out.println("bronWorkplace1---055 " + checkWorkplaceList.get(i));
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-
 
 //            model.addAttribute("allWorkplaceBron", workplaceBronList);
 //

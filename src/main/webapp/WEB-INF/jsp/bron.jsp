@@ -1,4 +1,4 @@
-1.104
+106 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
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -111,7 +111,12 @@
         var g =    document.getElementById("start").value;
         document.getElementById('test').innerHTML= g;
         if(dt<0){
-         alert( "Дата/время конца брони должно быть позже начала брони" );
+         alert( "Дата/время конца брони должно быть позже начала брони. Проверьте введенные данные." );
+
+          document.getElementById('startTmp').value=document.getElementById('start').value+ "T" +document.getElementById('startTime').value ;
+          document.getElementById('stopTmp').value=document.getElementById('start').value+ "T" +document.getElementById('startTime').value ;
+        //  return false; // отменяем нажатие кнопки
+
 }
 else
 {
