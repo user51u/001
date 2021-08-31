@@ -36,11 +36,7 @@
 
     <sec:authorize access="hasRole('ROLE_USER')">
         <p>ROLE_USER</p>
-
-
         <h4><a href="/bron">Бронирование рабочего места </a></h4>
-
-
         <h4><a href="/logout">Выйти</a></h4>
     </sec:authorize>
 
