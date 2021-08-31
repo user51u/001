@@ -16,12 +16,34 @@
     <h4><a href="/login">Войти</a></h4>
     <h4><a href="/registration">Зарегистрироваться</a></h4>
   </sec:authorize>
-  <sec:authorize access="isAuthenticated()">
+ <!-- <sec:authorize access="isAuthenticated()">
       <h4><a href="/bron">Бронирование рабочего места </a></h4>
-      <!-- <h4><a href="/news">Новости (только пользователь)</a></h4> -->
+      &lt;!&ndash; <h4><a href="/news">Новости (только пользователь)</a></h4> &ndash;&gt;
       <h4><a href="/indexadmin">Настройки</a></h4>
       <h4><a href="/logout">Выйти</a></h4>
   </sec:authorize>
+-->
+
+    <sec:authorize access="hasRole('ROLE_ADMIN') ">
+        <p>ROLE_ADMIN</p>
+
+        <h4><a href="/bron">Бронирование рабочего места </a></h4>
+
+        <h4><a href="/indexadmin">Настройки</a></h4>
+        <h4><a href="/logout">Выйти</a></h4>
+
+    </sec:authorize>
+
+    <sec:authorize access="hasRole('ROLE_USER')">
+        <p>ROLE_USER</p>
+
+
+        <h4><a href="/bron">Бронирование рабочего места </a></h4>
+
+
+        <h4><a href="/logout">Выйти</a></h4>
+    </sec:authorize>
+
 
 
  </div>
